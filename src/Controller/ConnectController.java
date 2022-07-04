@@ -10,5 +10,7 @@ package Controller;
  * @author juand
  */
 public class ConnectController {
-    
+    public static void main(String[] args) {
+        System.out.println("hello world");
+    }
 }
