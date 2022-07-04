@@ -4,11 +4,16 @@
  * and open the template in the editor.
  */
 package Main;
-
+import Controller.ConnectDatabase;
+import InitDatabase.CreateTable;
 /**
  *
  * @author juand
  */
 public class Main {
-    
+    public static void main(String[] args) {
+//        ConnectDatabase conn = new ConnectDatabase();
+//        conn.connect();
+        new CreateTable();
+    }
 }
