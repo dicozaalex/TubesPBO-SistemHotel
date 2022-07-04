@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Main;
+package Model;
 
 /**
  *
- * @author juand
+ * @author calvi
  */
-import View.ViewMainMenu;
-public class Main {
-    new ViewMainMenu();
+public enum EnumRoom {
+    OCCUPIED, NOT_OCCUPIED, UNDER_MAINTENANCE
 }

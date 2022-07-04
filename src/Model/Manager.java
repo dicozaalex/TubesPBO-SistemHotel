@@ -13,11 +13,12 @@ public class Manager extends User{
     private int idManager;
     private CabangHotel cabang;
 
-    public Manager(int idManager, CabangHotel cabang) {
+    public Manager(int idManager, CabangHotel cabang, String username, String firstname, String lastname, String password, String email, String telp, EnumStatusUser status) {
+        super(username, firstname, lastname, password, email, telp, status);
         this.idManager = idManager;
         this.cabang = cabang;
     }
-    
+
     public Manager(){
         
     }
