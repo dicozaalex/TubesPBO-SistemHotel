@@ -12,8 +12,6 @@ import InitDatabase.CreateTable;
  */
 public class Main {
     public static void main(String[] args) {
-//        ConnectDatabase conn = new ConnectDatabase();
-//        conn.connect();
         new CreateTable();
     }
 }
