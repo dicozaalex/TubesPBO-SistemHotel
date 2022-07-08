@@ -18,9 +18,8 @@ public class Staff extends User implements InterfaceData{
         
     }
 
-    public Staff(int idStaff, double gaji, CabangHotel cabang, String username, String firstname, String lastname, String password, String email, String telp, EnumStatusUser status) {
+    public Staff(double gaji, CabangHotel cabang, String username, String firstname, String lastname, String password, String email, String telp, EnumStatusUser status) {
         super(username, firstname, lastname, password, email, telp, status);
-        this.idStaff = idStaff;
         this.gaji = gaji;
         this.cabang = cabang;
     }

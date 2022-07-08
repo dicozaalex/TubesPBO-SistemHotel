@@ -22,8 +22,7 @@ public class Customer {
 
     }
 
-    public Customer(int idCustomer, double saldoWallet, EnumMember statusMember, ArrayList<Reservation> listTransaksi, ATMCard atmCard) {
-        this.idCustomer = idCustomer;
+    public Customer(double saldoWallet, EnumMember statusMember, ArrayList<Reservation> listTransaksi, ATMCard atmCard) {
         this.saldoWallet = saldoWallet;
         this.statusMember = statusMember;
         this.listTransaksi = listTransaksi;
