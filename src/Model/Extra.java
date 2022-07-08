@@ -20,8 +20,7 @@ public class Extra {
 
     }
 
-    public Extra(int idExtra, int idCabang, String namaExtra, int hargaExtra, JenisRoom jenis) {
-        this.idExtra = idExtra;
+    public Extra(int idCabang, String namaExtra, int hargaExtra, JenisRoom jenis) {
         this.idCabang = idCabang;
         this.namaExtra = namaExtra;
         this.hargaExtra = hargaExtra;

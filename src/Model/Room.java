@@ -20,8 +20,7 @@ public class Room {
         
     }
 
-    public Room(int idRoom, int idCabang, int idJenisRoom, int nomorRoom, EnumRoom statusOccupied) {
-        this.idRoom = idRoom;
+    public Room(int idCabang, int idJenisRoom, int nomorRoom, EnumRoom statusOccupied) {
         this.idCabang = idCabang;
         this.idJenisRoom = idJenisRoom;
         this.nomorRoom = nomorRoom;
