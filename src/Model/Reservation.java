@@ -27,8 +27,7 @@ public class Reservation {
 
     }
 
-    public Reservation(int idReservation, Room room, int pilihanIdCabang, String pilihanJenisCabang, ArrayList<Extra> extra, Date tanggalCheckIn, Date tanggalCheckOut, int jumOrang, double totalBayar) {
-        this.idReservation = idReservation;
+    public Reservation(Room room, int pilihanIdCabang, String pilihanJenisCabang, ArrayList<Extra> extra, Date tanggalCheckIn, Date tanggalCheckOut, int jumOrang, double totalBayar) {
         this.room = room;
         this.pilihanIdCabang = pilihanIdCabang;
         this.pilihanJenisCabang = pilihanJenisCabang;

@@ -16,8 +16,7 @@ public class JenisRoom {
     private int maksimalOrang;
     private double hargaRoom;
 
-    public JenisRoom(int idJenisRoom, int idCabang, String jenisRoom, int maksimalOrang, double hargaRoom) {
-        this.idJenisRoom = idJenisRoom;
+    public JenisRoom(int idCabang, String jenisRoom, int maksimalOrang, double hargaRoom) {
         this.idCabang = idCabang;
         this.jenisRoom = jenisRoom;
         this.maksimalOrang = maksimalOrang;
