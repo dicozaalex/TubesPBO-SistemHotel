@@ -5,22 +5,20 @@
  */
 package InitDatabase;
 
+import Controller.SingletonDatabase;
 import Controller.ConnectDatabase;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+
 /**
  *
  * @author juand
  */
 public class CreateTable {
 
-    static ConnectDatabase conn = new ConnectDatabase();
+    static ConnectDatabase conn = SingletonDatabase.getConnectObject();
 
     public CreateTable() {
-        
         String templateUser = "firstName VARCHAR(30),"
                 + "lastName VARCHAR(30),"
                 + "userName VARCHAR(20),"
@@ -28,7 +26,7 @@ public class CreateTable {
                 + "telepon VARCHAR(20),"
                 + "email VARCHAR(20),"
                 + "statusUser ENUM('CUSTOMER', 'STAFF', 'MANAGER', 'BOSS')";
-        
+
         String query1 = "CREATE TABLE users("
                 + "idUser INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
                 + "idJenisUser INT NOT NULL,"
@@ -102,15 +100,16 @@ public class CreateTable {
                 + "namaExtra VARCHAR(20),"
                 + "hargaExtra DOUBLE)";
         connectQuery(query12);
-        
+
     }
-    private void connectQuery(String query){
+
+    private void connectQuery(String query) {
         conn.connect();
-        try{
+        try {
             Statement stmt = conn.con.createStatement();
             stmt.execute(query);
             System.out.println("CREATE TABLE SUKSES");
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         conn.disconnect();
