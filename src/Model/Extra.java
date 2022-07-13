@@ -13,18 +13,16 @@ public class Extra {
     private int idExtra;
     private int idCabang;
     private String namaExtra;
-    private int hargaExtra;
-    private JenisRoom jenis;
+    private double hargaExtra;
     
     public Extra() {
 
     }
 
-    public Extra(int idCabang, String namaExtra, int hargaExtra, JenisRoom jenis) {
+    public Extra(int idCabang, String namaExtra, double hargaExtra) {
         this.idCabang = idCabang;
         this.namaExtra = namaExtra;
         this.hargaExtra = hargaExtra;
-        this.jenis = jenis;
     }
 
     public int getIdExtra() {
@@ -51,20 +49,12 @@ public class Extra {
         this.namaExtra = namaExtra;
     }
 
-    public int getHargaExtra() {
+    public double getHargaExtra() {
         return hargaExtra;
     }
 
-    public void setHargaExtra(int hargaExtra) {
+    public void setHargaExtra(double hargaExtra) {
         this.hargaExtra = hargaExtra;
-    }
-
-    public JenisRoom getJenis() {
-        return jenis;
-    }
-
-    public void setJenis(JenisRoom jenis) {
-        this.jenis = jenis;
     }
     
 }
