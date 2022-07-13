@@ -70,7 +70,7 @@ public class StaffController {
     public static boolean updateVoucher(Voucher voucher) {
         conn.connect();
         String query = "UPDATE voucher SET namaVoucher='" + voucher.getNamaVoucher() + "', "
-                + "persenVoucher=" + voucher.getPersenVoucher();
+                + "persenVoucher=" + voucher.getPersenVoucher() + " WHERE idVoucher=" + voucher.getIdVoucher();
         try {
             Statement stmt = conn.con.createStatement();
             stmt.executeQuery(query);
@@ -104,6 +104,55 @@ public class StaffController {
             conn.disconnect();
         }
         return extras;
+    }
+
+    public static boolean addExtra(Extra extra) {
+        conn.connect();
+        String query = "INSERT INTO extra (idCabang, namaExtra, hargaExtra) VALUES (?,?,?,?)";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, extra.getIdCabang());
+            stmt.setString(2, extra.getNamaExtra());
+            stmt.setDouble(3, extra.getHargaExtra());
+            stmt.executeUpdate();
+            conn.disconnect();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+            return false;
+        }
+    }
+
+    public static boolean deleteExtra(int idExtra) {
+        conn.connect();
+        String query = "DELETE FROM extra WHERE idExtra=" + idExtra;
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeQuery(query);
+            conn.disconnect();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+            return false;
+        }
+    }
+
+    public static boolean updateExtra(Extra extra) {
+        conn.connect();
+        String query = "UPDATE extra SET idCabang=" + extra.getIdCabang() + ", namaExtra='" + extra.getNamaExtra() + "', "
+                + "hargaExtra=" + extra.getHargaExtra() + " WHERE idExtra=" + extra.getIdExtra();
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeQuery(query);
+            conn.disconnect();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+            return false;
+        }
     }
 }
 
