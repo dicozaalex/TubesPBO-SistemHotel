@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import com.mysql.cj.xdevapi.SelectStatement;
 
 import Controller.CabangController;
 import Model.*;
