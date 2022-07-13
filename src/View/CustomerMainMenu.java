@@ -7,7 +7,7 @@ import javax.swing.*;
 import Model.*;
 
 public class CustomerMainMenu {
-    public CustomerMainMenu(Customer customer) {
+    public CustomerMainMenu(Customer customer, int selectedCabangHotel) {
         JFrame f = new JFrame("Main Menu");
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
         JLabel menuLabel = new JLabel("Please Select Your Menu");
@@ -55,21 +55,21 @@ public class CustomerMainMenu {
 
         memberButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new JoinMember();
+                new JoinMember(customer, selectedCabangHotel);
                 f.dispose();
             }
         });
 
         saldoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new CheckSaldo(customer);
+                new CheckSaldo(customer, selectedCabangHotel);
                 f.dispose();
             }
         });
 
         updateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new UpdateProfile(customer);
+                new UpdateProfile(customer, selectedCabangHotel);
                 f.dispose();
             }
         });
