@@ -6,25 +6,23 @@
 package Model;
 
 /**
- *
  * @author calvi
  */
-public class Staff extends User implements InterfaceData{
+public class Staff extends User implements InterfaceData {
     private int idStaff;
     private double gaji;
-    private CabangHotel cabang;
-    
-    public Staff(){
-        
+    private int idCabang;
+
+    public Staff() {
+
     }
 
-    public Staff(double gaji, CabangHotel cabang, String username, String firstname, String lastname, String password, String email, String telp, EnumStatusUser status) {
+    public Staff(double gaji, int cabang, String username, String firstname, String lastname, String password, String email, String telp, EnumStatusUser status) {
         super(username, firstname, lastname, password, email, telp, status);
         this.gaji = gaji;
-        this.cabang = cabang;
+        this.idCabang = cabang;
     }
 
-    
 
     public int getIdStaff() {
         return idStaff;
@@ -42,16 +40,16 @@ public class Staff extends User implements InterfaceData{
         this.gaji = gaji;
     }
 
-    public CabangHotel getCabang() {
-        return cabang;
+    public int getCabang() {
+        return idCabang;
     }
 
-    public void setCabang(CabangHotel cabang) {
-        this.cabang = cabang;
+    public void setCabang(int cabang) {
+        this.idCabang = cabang;
     }
-    
+
     @Override
-    public void dataCustomer(){
+    public void dataCustomer() {
         System.out.println("Hello World!");
     }
 }
