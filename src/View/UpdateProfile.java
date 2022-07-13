@@ -6,7 +6,7 @@ import java.awt.event.*;
 import Model.Customer;
 
 public class UpdateProfile {
-    public UpdateProfile(Customer customer) {
+    public UpdateProfile(Customer customer, int selectedCabangHotel) {
 
         JFrame f = new JFrame("Check Saldo");
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
@@ -79,7 +79,8 @@ public class UpdateProfile {
                 String lastname = inputLastname.getText();
                 String email = inputEmail.getText();
                 String phone = inputPhone.getText();
-                boolean cekUpdate = loginController.updateProfile(username, firstname, lastname, email, phone, customer);
+                boolean cekUpdate = loginController.updateProfile(username, firstname, lastname, email, phone,
+                        customer);
                 if (cekUpdate) {
                     JOptionPane.showMessageDialog(null, "Update Success");
                 } else {
@@ -87,7 +88,7 @@ public class UpdateProfile {
                 }
             }
         });
-        
+
         JButton backButton = new JButton("Back");
         backButton.setBounds(35, 250, 200, 25);
         f.add(backButton);
@@ -95,7 +96,7 @@ public class UpdateProfile {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CustomerMainMenu(customer);
+                new CustomerMainMenu(customer, selectedCabangHotel);
                 f.dispose();
             }
         });

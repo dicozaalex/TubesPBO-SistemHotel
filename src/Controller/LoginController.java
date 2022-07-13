@@ -171,6 +171,40 @@ public class LoginController {
         } else {
             return false;
         }
+    }
 
+    public boolean cekMembership(String username) {
+        conn.connect();
+        String query = "SELECT * FROM customer WHERE userName='" + username + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                if (rs.getString("statusMember").equals("MEMBER")) {
+                    return true;
+                }
+            }
+            return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean joinMembership(Customer customer, double price){
+        conn.connect();
+        String query = "UPDATE customer SET statusMember=?, saldoWallet=? WHERE userName=?";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, "MEMBER");
+            stmt.setDouble(2, customer.getSaldoWallet() - price);
+            stmt.setString(3, customer.getUsername());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
     }
 }
