@@ -48,7 +48,7 @@ public class CustomerMainMenu {
 
         bookButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new Booking();
+                new Booking(customer, selectedCabangHotel);
                 f.dispose();
             }
         });
