@@ -12,9 +12,9 @@ public class Staff extends User implements InterfaceData {
     private int idStaff;
     private double gaji;
     private int idCabang;
-
-    public Staff() {
-
+    
+    public Staff(){
+    
     }
 
     public Staff(double gaji, int cabang, String username, String firstname, String lastname, String password, String email, String telp, EnumStatusUser status) {
@@ -40,7 +40,7 @@ public class Staff extends User implements InterfaceData {
         this.gaji = gaji;
     }
 
-    public int getCabang() {
+    public int getIdCabang() {
         return idCabang;
     }
 
