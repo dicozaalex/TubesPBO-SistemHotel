@@ -9,7 +9,6 @@ package Controller;
  *
  * @author calvi
  */
-import Model.*;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
