@@ -6,12 +6,14 @@
 package Main;
 import Controller.ConnectDatabase;
 import InitDatabase.CreateTable;
+import View.Login;
 /**
  *
  * @author juand
  */
 public class Main {
     public static void main(String[] args) {
-        new CreateTable();
+        // new CreateTable();
+        new Login();
     }
 }
