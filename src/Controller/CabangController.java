@@ -11,7 +11,6 @@ package Controller;
  */
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.sql.ResultSet;
 
 public class CabangController {
@@ -36,24 +35,4 @@ public class CabangController {
         return count;
     }
 
-    public static ArrayList<CabangHotel> getAllCabangs() {
-        ArrayList<CabangHotel> cabangs = new ArrayList<>();
-        conn.connect();
-        String query = "SELECT * FROM cabang";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                CabangHotel cabangHotel = new CabangHotel();
-                cabangHotel.setIdCabang(rs.getInt("idCabang"));
-                cabangHotel.setLokasiCabang(rs.getString("lokasiCabang"));
-                cabangHotel.setAlamatCabang(rs.getString("alamatCabang"));
-                cabangs.add(cabangHotel);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (cabangs);
-    }
-    
 }
