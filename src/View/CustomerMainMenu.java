@@ -1,64 +1,92 @@
 package View;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
-
-import Controller.CabangController;
-import Model.CabangHotel;
-
+import Model.*;
 
 public class CustomerMainMenu {
-    public CustomerMainMenu(){
-        JFrame f = new JFrame("Customer Main Menu");
-        ArrayList<CabangHotel> cabangHotel = new ArrayList<CabangHotel>();
-        cabangHotel.add(new CabangHotel("Cabang 1", "Jl. Raya", "081234567890"));
-        cabangHotel.add(new CabangHotel("Cabang 2", "Jl. Raya", "081234567890"));
-        JComboBox inputCabangHotel = new JComboBox(cabangHotel.toArray());
-        JButton bookButton = new JButton("Book");
+    public CustomerMainMenu(Customer customer) {
+        JFrame f = new JFrame("Main Menu");
+        JLabel welcomeLabel = new JLabel("Welcome to Hotel");
+        JLabel menuLabel = new JLabel("Please Select Your Menu");
 
-        inputCabangHotel.setBounds(100, 100, 200, 20);
-        bookButton.setBounds(100, 200, 100, 20);
+        welcomeLabel.setFont(new Font("Arial", Font.ITALIC, 20));
+        welcomeLabel.setBounds(100, 20, 300, 20);
+        f.add(welcomeLabel);
 
-        f.add(inputCabangHotel);
+        menuLabel.setFont(new Font("Arial", Font.ITALIC, 15));
+        menuLabel.setBounds(20, 90, 300, 20);
+        f.add(menuLabel);
+
+        JButton bookButton = new JButton("1. Book");
+        JButton memberButton = new JButton("2. Join Member");
+        JButton saldoButton = new JButton("3. Check Saldo");
+        JButton updateButton = new JButton("4. Update your Profile");
+        JButton backButton = new JButton("Back");
+        JButton logoutButton = new JButton("Logout");
+
+        bookButton.setHorizontalAlignment(SwingConstants.LEFT);
+        memberButton.setHorizontalAlignment(SwingConstants.LEFT);
+        saldoButton.setHorizontalAlignment(SwingConstants.LEFT);
+        updateButton.setHorizontalAlignment(SwingConstants.LEFT);
+
+        bookButton.setBounds(35, 120, 325, 30);
+        memberButton.setBounds(35, 160, 325, 30);
+        saldoButton.setBounds(35, 200, 325, 30);
+        updateButton.setBounds(35, 240, 325, 30);
+        backButton.setBounds(200, 280, 150, 30);
+        logoutButton.setBounds(50, 280, 150, 30);
+
         f.add(bookButton);
+        f.add(memberButton);
+        f.add(saldoButton);
+        f.add(updateButton);
+        f.add(backButton);
+        f.add(logoutButton);
 
         bookButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainMenu();;
+                new Booking();
                 f.dispose();
             }
         });
 
-        f.setSize(400, 400);
-        f.setLayout(null);
-        f.setVisible(true);
+        memberButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new JoinMember();
+                f.dispose();
+            }
+        });
 
-    }
-    public void mainMenu(){
-        JFrame f = new JFrame("Main Menu");
-        JLabel bookLabel = new JLabel("Booking");
-        JLabel memberLabel = new JLabel("Member");
-        JLabel saldoLabel = new JLabel("Saldo");
+        saldoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new CheckSaldo(customer);
+                f.dispose();
+            }
+        });
 
-        JButton bookButton = new JButton("Book");
-        JButton memberButton = new JButton("Member");
-        JButton saldoButton = new JButton("Saldo");
+        updateButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new UpdateProfile(customer);
+                f.dispose();
+            }
+        });
 
-        bookLabel.setBounds(5, 30, 200, 20);
-        bookButton.setBounds(75, 30, 200, 20);
-        memberLabel.setBounds(5, 50, 200, 20);
-        memberButton.setBounds(75, 50, 200, 20);
-        saldoLabel.setBounds(5, 70, 200, 20);
-        saldoButton.setBounds(75, 70, 200, 20);
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new CustomerBranchMenu(customer);
+                f.dispose();
+            }
+        });
 
-        f.add(bookLabel);
-        f.add(bookButton);
-        f.add(memberLabel);
-        f.add(memberButton);
-        f.add(saldoLabel);
-        f.add(saldoButton);
+        logoutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new Login();
+                f.dispose();
+            }
+        });
 
         f.setSize(400, 400);
         f.setLayout(null);
