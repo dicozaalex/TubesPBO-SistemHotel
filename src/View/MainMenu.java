@@ -27,12 +27,14 @@ public class MainMenu {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new Login();
+                f.dispose();
             }
         });
 
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new Register();
+                f.dispose();
             }
         });
 

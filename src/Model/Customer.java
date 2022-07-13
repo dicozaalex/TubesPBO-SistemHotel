@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author stefa
  */
-public class Customer {
+public class Customer extends User {
 
     private int idCustomer;
     private double saldoWallet;
@@ -18,11 +18,15 @@ public class Customer {
     private ArrayList<Reservation> listTransaksi;
     private ATMCard atmCard;
 
-    public Customer() {
+    public Customer(){
 
     }
-
-    public Customer(double saldoWallet, EnumMember statusMember, ArrayList<Reservation> listTransaksi, ATMCard atmCard) {
+    
+    public Customer(String username, String firstname, String lastname, String password, String email, String telp,
+            EnumStatusUser status, int idCustomer, double saldoWallet, EnumMember statusMember,
+            ArrayList<Reservation> listTransaksi, ATMCard atmCard) {
+        super(username, firstname, lastname, password, email, telp, status);
+        this.idCustomer = idCustomer;
         this.saldoWallet = saldoWallet;
         this.statusMember = statusMember;
         this.listTransaksi = listTransaksi;
@@ -68,5 +72,5 @@ public class Customer {
     public void setAtmCard(ATMCard atmCard) {
         this.atmCard = atmCard;
     }
-    
+
 }
