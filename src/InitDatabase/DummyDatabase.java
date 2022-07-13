@@ -25,6 +25,7 @@ public class DummyDatabase {
     CabangHotel cabang1 = new CabangHotel(1, "Pasir Kaliki", "Pasir Kaliki no 24", listRoom1);
     Manager manager1 = new Manager(1, cabang1, "UdinWorld", "Udin", "Sedunia", "1234", "udinsworld@gmail.com", "085148117283", EnumStatusUser.MANAGER);
 
+    
     public DummyDatabase() {
         listRoom1.add(room1);
         listRoom1.add(room2);
