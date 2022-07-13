@@ -26,6 +26,9 @@ public class CabangHotel {
         
     }
 
+    public CabangHotel(String lokasiCabang2, String alamatCabang2, String string) {
+    }
+
     public int getIdCabang() {
         return idCabang;
     }
