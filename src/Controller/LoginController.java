@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import Model.*;
 
 public class LoginController {
-    static ConnectDatabase conn=new ConnectDatabase();
+    static ConnectDatabase conn = new ConnectDatabase();
 
     public LoginController() {
     }
@@ -89,5 +89,88 @@ public class LoginController {
             e.printStackTrace();
         }
         return (customers);
+    }
+
+    public static Customer getCustomer(String username) {
+        conn.connect();
+        String query = "SELECT * FROM customer WHERE userName='" + username + "'";
+        Customer customer = new Customer();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                customer.setIdCustomer(rs.getInt("idCustomer"));
+                customer.setFirstname(rs.getString("firstName"));
+                customer.setLastname(rs.getString("lastName"));
+                customer.setUsername(rs.getString("userName"));
+                customer.setPassword(rs.getString("password"));
+                customer.setEmail(rs.getString("email"));
+                customer.setTelp(rs.getString("telepon"));
+                customer.setSaldoWallet(rs.getDouble("saldoWallet"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (customer);
+    }
+
+    public boolean topUp(String cardNumber, String pin, double saldo, String username, double saldoAwal) {
+        conn.connect();
+        String query = "UPDATE customer SET saldoWallet=? WHERE userName=?";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setDouble(1, saldoAwal + saldo);
+            stmt.setString(2, username);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public boolean changePassword(String oldPass, String newPass, Customer customer) {
+        if (oldPass.equals(customer.getPassword())) {
+            conn.connect();
+            String query = "UPDATE customer SET password=? WHERE userName=?";
+            try {
+                PreparedStatement stmt = conn.con.prepareStatement(query);
+                stmt.setString(1, newPass);
+                stmt.setString(2, customer.getUsername());
+                stmt.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return (false);
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public boolean updateProfile(String username, String firstname, String lastname, String email, String phone,
+            Customer customer) {
+        conn.connect();
+        boolean cek = cekUsername(username);
+        if (cek) {
+            String query = "UPDATE customer SET userName=?, firstName=?, lastName=?, email=?, telepon=? WHERE userName=?";
+            try {
+                PreparedStatement stmt = conn.con.prepareStatement(query);
+                stmt.setString(1, username);
+                stmt.setString(2, firstname);
+                stmt.setString(3, lastname);
+                stmt.setString(4, email);
+                stmt.setString(5, phone);
+                stmt.setString(6, customer.getUsername());
+                stmt.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return (false);
+            }
+        } else {
+            return false;
+        }
+
     }
 }

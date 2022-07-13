@@ -7,19 +7,25 @@ import Controller.*;
 
 public class Register {
     public Register() {
-        JFrame f = new JFrame("Register Here");
+        JFrame f = new JFrame("Register Your Account");
+        JLabel titLabel = new JLabel("PLEASE FILL WITH YOUR DETAILS");
+
+        titLabel.setFont(new Font("Arial", Font.ITALIC, 15));
+        titLabel.setBounds(35, 20, 300, 20);
+        f.add(titLabel);
+
         JLabel username, firstname, lastname, password, confirmPass, email, phone;
         JTextField inputUserName, inputFirstname, inputLastname, inputEmail,
                 inputPhone;
         JPasswordField inputPassword, inputConfirmPass;
 
-        username = new JLabel("Username :");
-        firstname = new JLabel("First Name :");
-        lastname = new JLabel("Last Name :");
-        password = new JLabel("Password :");
-        confirmPass = new JLabel("Confirm Password :");
-        email = new JLabel("Email :");
-        phone = new JLabel("Phone :");
+        username = new JLabel("Username");
+        firstname = new JLabel("First Name");
+        lastname = new JLabel("Last Name");
+        password = new JLabel("Password");
+        confirmPass = new JLabel("Confirm Password");
+        email = new JLabel("Email");
+        phone = new JLabel("Phone");
 
         inputUserName = new JTextField();
         inputFirstname = new JTextField();
@@ -29,24 +35,26 @@ public class Register {
         inputEmail = new JTextField();
         inputPhone = new JTextField();
 
-        username.setBounds(5, 20, 200, 20);
-        firstname.setBounds(5, 40, 200, 20);
-        lastname.setBounds(5, 60, 200, 20);
-        password.setBounds(5, 80, 200, 20);
-        confirmPass.setBounds(5, 100, 200, 20);
-        email.setBounds(5, 120, 200, 20);
-        phone.setBounds(5, 140, 200, 20);
+        username.setBounds(35, 60, 200, 20);
+        firstname.setBounds(35, 80, 200, 20);
+        lastname.setBounds(35, 100, 200, 20);
+        password.setBounds(35, 120, 200, 20);
+        confirmPass.setBounds(35, 140, 200, 20);
+        email.setBounds(35, 160, 200, 20);
+        phone.setBounds(35, 180, 200, 20);
 
-        inputUserName.setBounds(150, 20, 200, 20);
-        inputFirstname.setBounds(150, 40, 200, 20);
-        inputLastname.setBounds(150, 60, 200, 20);
-        inputPassword.setBounds(150, 80, 200, 20);
-        inputConfirmPass.setBounds(150, 100, 200, 20);
-        inputEmail.setBounds(150, 120, 200, 20);
-        inputPhone.setBounds(150, 140, 200, 20);
+        inputUserName.setBounds(150, 60, 200, 25);
+        inputFirstname.setBounds(150, 80, 200, 25);
+        inputLastname.setBounds(150, 100, 200, 25);
+        inputPassword.setBounds(150, 120, 200, 25);
+        inputConfirmPass.setBounds(150, 140, 200, 25);
+        inputEmail.setBounds(150, 160, 200, 25);
+        inputPhone.setBounds(150, 180, 200, 25);
 
-        JButton registerButton = new JButton("Login");
-        registerButton.setBounds(5, 50, 100, 20);
+        JButton registerButton = new JButton("REGISTER");
+        registerButton.setBounds(35, 230, 300, 30);
+
+        registerButton.setFont(new Font("Arial", Font.ITALIC, 12));
 
         registerButton.addActionListener(new ActionListener() {
             @Override
@@ -71,7 +79,7 @@ public class Register {
                     else{
                         c.register(username, firstname, lastname, password, email, phone);
                         f.dispose();
-                        new MainMenu();
+                        new Login();
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "Username already exists");

@@ -6,16 +6,15 @@
 package Model;
 
 /**
- *
  * @author calvi
  */
-public class Staff extends User implements InterfaceData{
+public class Staff extends User implements InterfaceData {
     private int idStaff;
     private double gaji;
     private int idCabang;
     
     public Staff(){
-        
+    
     }
 
     public Staff(double gaji, int cabang, String username, String firstname, String lastname, String password, String email, String telp, EnumStatusUser status) {
@@ -24,7 +23,6 @@ public class Staff extends User implements InterfaceData{
         this.idCabang = cabang;
     }
 
-    
 
     public int getIdStaff() {
         return idStaff;
@@ -49,9 +47,9 @@ public class Staff extends User implements InterfaceData{
     public void setCabang(int cabang) {
         this.idCabang = cabang;
     }
-    
+
     @Override
-    public void dataCustomer(){
+    public void dataCustomer() {
         System.out.println("Hello World!");
     }
 }
