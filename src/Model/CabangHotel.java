@@ -16,8 +16,7 @@ public class CabangHotel {
     private String alamatCabang;
     private ArrayList<Room> listRoom;
 
-    public CabangHotel(int idCabang, String lokasiCabang, String alamatCabang, ArrayList<Room> listRoom) {
-        this.idCabang = idCabang;
+    public CabangHotel(String lokasiCabang, String alamatCabang, ArrayList<Room> listRoom) {
         this.lokasiCabang = lokasiCabang;
         this.alamatCabang = alamatCabang;
         this.listRoom = listRoom;
@@ -25,6 +24,9 @@ public class CabangHotel {
     
     public CabangHotel(){
         
+    }
+
+    public CabangHotel(String lokasiCabang2, String alamatCabang2, String string) {
     }
 
     public int getIdCabang() {

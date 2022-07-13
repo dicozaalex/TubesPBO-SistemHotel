@@ -6,7 +6,7 @@
 package Main;
 import Controller.ConnectDatabase;
 import InitDatabase.CreateTable;
-import View.MainMenu;
+import View.Login;
 /**
  *
  * @author juand
@@ -14,6 +14,6 @@ import View.MainMenu;
 public class Main {
     public static void main(String[] args) {
         // new CreateTable();
-        new MainMenu();
+        new Login();
     }
 }
