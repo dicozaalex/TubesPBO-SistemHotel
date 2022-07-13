@@ -58,6 +58,7 @@ public class CreateTable {
         String query6 = "CREATE TABLE transaksi("
                 + "idReservation INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
                 + "idCustomer INT,"
+                + "idCabang INT,"
                 + "tanggalCheckIn DATE,"
                 + "tanggalCheckOut DATE,"
                 + "berapaOrang INT,"
@@ -113,5 +114,8 @@ public class CreateTable {
             e.printStackTrace();
         }
         conn.disconnect();
+    }
+    public static void main(String[] args) {
+        new CreateTable();
     }
 }
