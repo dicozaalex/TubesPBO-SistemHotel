@@ -90,6 +90,18 @@ public class ReservationController {
         return 0;
     }
 
+    public int takeIdRoom(int selectedCabangHotel, String jenisRoom){
+        ArrayList<Room> rooms = getAllRoom(selectedCabangHotel);
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.get(i).getIdJenisRoom() == getIdJenisRoom(selectedCabangHotel, jenisRoom)) {
+                if (rooms.get(i).getStatusOccupied() == EnumRoom.NOT_OCCUPIED) {
+                    return rooms.get(i).getIdRoom();
+                }
+            }
+        }
+        return 0;
+    }
+
     public void setStatusOccupied(int selectedCabangHotel, String jenisRoom, int nomorRoom) {
         conn.connect();
         String query = "UPDATE room SET status='" + EnumRoom.OCCUPIED + "' WHERE idCabang=" + selectedCabangHotel + " AND idJenisRoom=" + getIdJenisRoom(selectedCabangHotel, jenisRoom) + " AND nomorRoom=" + nomorRoom;
