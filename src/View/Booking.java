@@ -244,6 +244,7 @@ public class Booking {
                 boolean cekSaldo = reservationController.cekSaldoBayar(customer, totalHargaRoom);
                 if (cekSaldo) {
                     JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
+                    // reservationController.setTransaksi(customer, tanggalCheckIn, tanggalCheckOut, banyakOrang, idRoom, totalHarga);
                 } else {
                     JOptionPane.showMessageDialog(null, "Pembayaran Gagal");
                 }
