@@ -27,19 +27,17 @@ import Model.Extra;
 import Model.JenisRoom;
 import java.awt.Font;
 
-
 public class Booking {
     JTextField inputLebih;
     ReservationController reservationController = new ReservationController();
-        StaffController staffController = new StaffController();
-        LoginController loginController = new LoginController();
+    StaffController staffController = new StaffController();
+    LoginController loginController = new LoginController();
 
     public Booking(Customer customer, int selectedCabangHotel) {
         JFrame f = new JFrame("Booking");
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
         JLabel menuLabel = new JLabel("Please Select Your Menu");
 
-        
         welcomeLabel.setFont(new Font("Arial", Font.ITALIC, 20));
         welcomeLabel.setBounds(100, 20, 300, 20);
         f.add(welcomeLabel);
@@ -126,7 +124,8 @@ public class Booking {
                 int takeRoom = reservationController.takeRoom(selectedCabangHotel, jenisRoom);
                 reservationController.setStatusOccupied(selectedCabangHotel, jenisRoom, takeRoom);
                 if (cekRoom) {
-                    addReservation(customer, selectedCabangHotel, banyakOrangInt, jenisRoom, tanggal, lamaInap, takeRoom);
+                    addReservation(customer, selectedCabangHotel, banyakOrangInt, jenisRoom, tanggal, lamaInap,
+                            takeRoom);
                     f.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Room Not Available");
@@ -143,10 +142,10 @@ public class Booking {
 
     public void addReservation(Customer customer, int selectedCabangHotel, int banyakOrang, String jenisRoom,
             String tanggal, int lamaInap, int takeRoom) {
-        
+
         JFrame f = new JFrame("Confirmation");
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
-       
+
         welcomeLabel.setFont(new Font("Arial", Font.ITALIC, 20));
         welcomeLabel.setBounds(100, 20, 300, 20);
         f.add(welcomeLabel);
@@ -190,29 +189,29 @@ public class Booking {
             }
         }
         JLabel voucherLabel = new JLabel("Voucher");
-        voucherLabel.setBounds(20, 180, 250, 20);
+        voucherLabel.setBounds(20, 220, 250, 20);
         f.add(voucherLabel);
 
         JTextField voucherTextField = new JTextField();
-        voucherTextField.setBounds(100, 180, 250, 30);
+        voucherTextField.setBounds(100, 220, 250, 30);
         f.add(voucherTextField);
 
-
         JButton confirmButton = new JButton("Confirm");
-        confirmButton.setBounds(50, 220, 300, 30);
+        confirmButton.setBounds(50, 260, 300, 30);
         f.add(confirmButton);
-        
+
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String voucher = voucherTextField.getText();
                 boolean cekVoucher = staffController.cekVoucher(voucher);
                 if (cekVoucher) {
                     JOptionPane.showMessageDialog(null, "Voucher Valid");
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Voucher Invalid");
                 }
-                double totalHargaRoom = reservationController.cekHarga(selectedCabangHotel, member, jenisRoom, addExtraCheckBox, voucher, customer, extras);
-                menuConfirmation(customer, totalHargaRoom);
+                double totalHargaRoom = reservationController.cekHarga(selectedCabangHotel, member, jenisRoom,
+                        addExtraCheckBox, voucher, customer, extras, lamaInap);
+                menuConfirmation(customer, totalHargaRoom, selectedCabangHotel);
                 f.dispose();
             }
         });
@@ -223,9 +222,9 @@ public class Booking {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void menuConfirmation(Customer customer, double totalHargaRoom){
+    public void menuConfirmation(Customer customer, double totalHargaRoom, int selectedCabangHotel) {
         JFrame f = new JFrame("Confirmation");
-        JLabel totalHargaLabel = new JLabel("Total Harga\n" + totalHargaRoom);
+        JLabel totalHargaLabel = new JLabel("Total Harga\n " + totalHargaRoom);
         totalHargaLabel.setBounds(20, 50, 300, 20);
         f.add(totalHargaLabel);
 
@@ -238,10 +237,11 @@ public class Booking {
                 boolean cekSaldo = reservationController.cekSaldoBayar(customer, totalHargaRoom);
                 if (cekSaldo) {
                     JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Pembayaran Gagal");
                 }
                 f.dispose();
+                new CustomerMainMenu(customer, selectedCabangHotel);
             }
         });
 

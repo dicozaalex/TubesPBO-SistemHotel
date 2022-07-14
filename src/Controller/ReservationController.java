@@ -117,12 +117,12 @@ public class ReservationController {
     
 
     public double cekHarga(int selectedCabangHotel, boolean member, String jenisRoom, JCheckBox addExtraCheckBox[],
-            String voucher, Customer customer, ArrayList<Extra> extras) {
+            String voucher, Customer customer, ArrayList<Extra> extras, int lamaInap) {
         double hargaRoom = 0;
         ArrayList<JenisRoom> jenisRooms = getAllJenisRoom(selectedCabangHotel);
         for (int i = 0; i < jenisRooms.size(); i++) {
             if (jenisRooms.get(i).getJenisRoom().equals(jenisRoom)) {
-                hargaRoom += jenisRooms.get(i).getHargaRoom();
+                hargaRoom = jenisRooms.get(i).getHargaRoom() * lamaInap;
             }
         }
         if (!member) {
