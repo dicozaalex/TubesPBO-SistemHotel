@@ -70,18 +70,17 @@ public class Register {
                 String email = inputEmail.getText();
                 String phone = inputPhone.getText();
                 if (cekUsername) {
-                    if(username.equals("") || firstname.equals("") || lastname.equals("") || password.equals("") || confirmPass.equals("") || email.equals("") || phone.equals("")){
+                    if (username.equals("") || firstname.equals("") || lastname.equals("") || password.equals("")
+                            || confirmPass.equals("") || email.equals("") || phone.equals("")) {
                         JOptionPane.showMessageDialog(null, "Please fill all the fields");
-                    }
-                    else if(!password.equals(confirmPass)){
+                    } else if (!password.equals(confirmPass)) {
                         JOptionPane.showMessageDialog(null, "Password does not match");
-                    }
-                    else{
+                    } else {
                         c.register(username, firstname, lastname, password, email, phone);
                         f.dispose();
                         new Login();
                     }
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Username already exists");
                 }
             }
@@ -106,5 +105,6 @@ public class Register {
         f.setSize(400, 400);
         f.setLayout(null);
         f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

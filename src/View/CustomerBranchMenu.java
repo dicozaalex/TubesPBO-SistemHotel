@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+
 import Controller.CabangController;
 import Model.*;
-
 
 public class CustomerBranchMenu {
     public CustomerBranchMenu(Customer customer) {
@@ -45,8 +45,8 @@ public class CustomerBranchMenu {
 
         bookButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String selectedCabangHotel = (String) inputCabangHotel.getSelectedItem();
-                new CustomerMainMenu(customer);
+                int selectedCabangHotel = inputCabangHotel.getSelectedIndex();
+                new CustomerMainMenu(customer, selectedCabangHotel);
                 f.dispose();
             }
         });

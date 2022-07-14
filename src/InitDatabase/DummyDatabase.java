@@ -55,6 +55,7 @@ public class DummyDatabase {
     Voucher voucher1 = new Voucher("Diskon 50%", 50);
     Voucher voucher2 = new Voucher("Diskon 25%", 25);
 
+    
     public DummyDatabase() {
         conn.connect();
         listRoom1.add(room1);
