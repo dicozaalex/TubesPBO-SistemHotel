@@ -60,6 +60,7 @@ public class Login extends JFrame implements ActionListener {
         if (e.getSource() == loginButton) {
             LoginController logc = new LoginController();
             CustomerController cusc = new CustomerController();
+            Boss bos = new Boss();
             String cekUsername = inputUserName.getText();
             String cekPassword = inputPassword.getText();
             String valueReturn = logc.login(cekUsername, cekPassword);
@@ -78,7 +79,7 @@ public class Login extends JFrame implements ActionListener {
                 }else if(valueReturn.equals("manager")){
 //                    new ManagerMainMenu();
                 }else if(valueReturn.equals("boss")){
-                    new BossMainMenu();
+                    new BossMainMenu(bos.getUsername());
                 }
                 
             } else {

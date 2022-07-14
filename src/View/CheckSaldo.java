@@ -103,7 +103,7 @@ public class CheckSaldo {
                 CustomerController loginController = new CustomerController();
                 boolean cekCardNumber = loginController.cekCardNumber(card, pin);
                 if (cekCardNumber) {
-                    boolean cekTopUp = customerController.topUp(saldo, customer.getUsername(),
+                    boolean cekTopUp = loginController.topUp(saldo, customer.getUsername(),
                             customer.getSaldoWallet(), card);
                     if (cekTopUp) {
                         JOptionPane.showMessageDialog(null, "Top Up Success");
