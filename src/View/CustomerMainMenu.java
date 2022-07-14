@@ -1,10 +1,11 @@
 package View;
 
-import java.awt.*;
-import java.awt.event.*;
+import Model.Customer;
 
 import javax.swing.*;
-import Model.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CustomerMainMenu {
     public CustomerMainMenu(Customer customer, int selectedCabangHotel) {
