@@ -110,6 +110,13 @@ public class Booking {
         cancelButton.setBounds(20, 350, 300, 30);
         f.add(cancelButton);
 
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new CustomerMainMenu(customer, selectedCabangHotel);
+                f.dispose();
+            }
+        });
+
         pembayaranButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String banyakOrang = inputBanyakOrang.getSelectedItem().toString();
