@@ -8,11 +8,13 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import Controller.*;
 
 public class BossMainMenu extends JFrame implements ActionListener {
 
-    JFrame f = new JFrame();
-
+    JFrame f = new JFrame("Menu Boss");
+    BosController bosc = new BosController();
+    
     JButton buttonPendapatan, buttonAddCabang,buttonExit;
 
     BossMainMenu() {
@@ -23,6 +25,10 @@ public class BossMainMenu extends JFrame implements ActionListener {
         buttonPendapatan.setBounds(60,120,260,40);
         buttonAddCabang.setBounds(60,180,260,40);
         buttonExit.setBounds(60,240,260,40);
+        buttonPendapatan.addActionListener(this);
+        buttonAddCabang.addActionListener(this);
+        buttonExit.addActionListener(this);
+        
         f.add(buttonPendapatan);
         f.add(buttonAddCabang);
         f.add(buttonExit);
@@ -36,14 +42,15 @@ public class BossMainMenu extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonPendapatan) {
-            JOptionPane.showMessageDialog(null, "Hello!");
+            JOptionPane.showMessageDialog(null, bosc.viewPendapatanTotal());
         }
         if (e.getSource() == buttonAddCabang) {
             f.dispose();
-            new AddCabangBaru();
+            String[] arrayKosong = {"",""};
+            new AddCabangBaru(arrayKosong);
         }
         if(e.getSource()==buttonExit){
-            
+            f.dispose();
         }
     }
     public static void main(String[] args) {

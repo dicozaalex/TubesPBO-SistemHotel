@@ -14,7 +14,12 @@ public class Boss extends User {
     public Boss() {
 
     }
-
+    
+    public Boss(int idBoss, String username, String firstname, String lastname, String password, String email, String telp, EnumStatusUser status) {
+        super(username, firstname, lastname, password, email, telp, status);
+        this.idBoss = idBoss;
+    }
+    
     public Boss(String username, String firstname, String lastname, String password, String email, String telp, EnumStatusUser status) {
         super(username, firstname, lastname, password, email, telp, status);
     }

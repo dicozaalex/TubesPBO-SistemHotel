@@ -1,11 +1,10 @@
 package View;
 
 import Controller.LoginController;
-import Model.Customer;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import java.awt.event.*;
+import Model.Customer;
 
 public class CheckSaldo {
     public CheckSaldo(Customer customer, int selectedCabangHotel) {
@@ -97,14 +96,19 @@ public class CheckSaldo {
                 String pin = pinField.getText();
                 double saldo = Double.parseDouble(saldoField.getText());
                 LoginController loginController = new LoginController();
-                boolean cekTopUp = loginController.topUp(card, pin, saldo, customer.getUsername(),
-                        customer.getSaldoWallet());
-                if (cekTopUp) {
-                    JOptionPane.showMessageDialog(null, "Top Up Success");
-                    f.dispose();
-                    new CustomerMainMenu(customer, selectedCabangHotel);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Top Up Failed");
+                boolean cekCardNumber = loginController.cekCardNumber(card, pin);
+                if (cekCardNumber) {
+                    boolean cekTopUp = loginController.topUp(saldo, customer.getUsername(),
+                            customer.getSaldoWallet());
+                    if (cekTopUp) {
+                        JOptionPane.showMessageDialog(null, "Top Up Success");
+                        f.dispose();
+                        new CustomerMainMenu(customer, selectedCabangHotel);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Top Up Failed");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Card Number or PIN Wrong");
                 }
             }
         });

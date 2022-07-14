@@ -16,6 +16,14 @@ public class CabangHotel {
     private String alamatCabang;
     private ArrayList<Room> listRoom;
 
+    public CabangHotel(int idCabang, String lokasiCabang, String alamatCabang, ArrayList<Room> listRoom) {
+        this.idCabang = idCabang;
+        this.lokasiCabang = lokasiCabang;
+        this.alamatCabang = alamatCabang;
+        this.listRoom = listRoom;
+    }
+
+    
     public CabangHotel(String lokasiCabang, String alamatCabang, ArrayList<Room> listRoom) {
         this.lokasiCabang = lokasiCabang;
         this.alamatCabang = alamatCabang;

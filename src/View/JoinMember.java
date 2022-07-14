@@ -78,6 +78,14 @@ public class JoinMember {
         backButton.setBounds(35, 250, 200, 25);
         f.add(backButton);
 
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CustomerMainMenu(customer, selectedCabangHotel);
+                f.dispose();
+            }
+        });
+
         f.setSize(400, 350);
         f.setLayout(null);
         f.setVisible(true);
