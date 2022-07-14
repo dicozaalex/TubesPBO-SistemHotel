@@ -10,6 +10,7 @@ import Model.Voucher;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StaffMainMenu {
     public StaffMainMenu() {
@@ -84,7 +85,7 @@ public class StaffMainMenu {
         JFrame frameShowExtras = new JFrame("Show Extras");
         frameShowExtras.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         JPanel panelShowExtras = new JPanel();
-        var dataTabel = StaffController.getAllExtras();
+        List<List<String>> dataTabel = StaffController.getAllExtras();
         if (!dataTabel.isEmpty()) {
             String[] columnNames = {"ID Extra", "ID Cabang", "Nama Extra", "Harga Extra"};
             String[][] data = new String[dataTabel.size()][dataTabel.get(0).size()];
@@ -173,7 +174,7 @@ public class StaffMainMenu {
         JFrame frameShowVouchers = new JFrame("Show Vouchers");
         frameShowVouchers.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         JPanel panelShowVouchers = new JPanel();
-        var dataTabelVoucher = StaffController.getAllVouchers();
+        List<List<String>> dataTabelVoucher = StaffController.getAllVouchers();
         if (!dataTabelVoucher.isEmpty()) {
             String[] columnNames = {"ID Voucher", "Nama Voucher", "Persen Voucher"};
             String[][] data = new String[dataTabelVoucher.size()][dataTabelVoucher.get(0).size()];
