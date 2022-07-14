@@ -90,6 +90,7 @@ public class Booking {
         p.put("text.month", "Month");
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model1, p);
+        
         JDatePickerImpl tanggalCheckIn = new JDatePickerImpl(datePanel, new DateLabelFormatter());
         tanggalCheckIn.setBounds(20, 200, 300, 30);
         f.add(tanggalCheckIn);
@@ -246,7 +247,8 @@ public class Booking {
                 if (cekSaldo) {
                     JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
 //                    String tanggalCheckOut = ;
-//                    reservationController.setTransaksi(customer, tanggalCheckIn, tanggalCheckOut, banyakOrang, idRoom, totalHargaRoom);
+                    String stringLamaInap = String.valueOf(lamaInap);
+                    reservationController.setTransaksi(customer, tanggalCheckIn, stringLamaInap, banyakOrang, idRoom, totalHargaRoom);
                 } else {
                     JOptionPane.showMessageDialog(null, "Pembayaran Gagal");
                 }
