@@ -65,7 +65,7 @@ public class Login extends JFrame implements ActionListener {
             String cekPassword = inputPassword.getText();
             String valueReturn = logc.login(cekUsername, cekPassword);
             boolean berhasil = false;
-            if (valueReturn.equals("")) {
+            if (!valueReturn.equals("")) {
                 berhasil = true;
             }
             if (berhasil) {
