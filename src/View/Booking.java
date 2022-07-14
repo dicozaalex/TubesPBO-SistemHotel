@@ -19,7 +19,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import Controller.DateLabelFormatter;
-import Controller.LoginController;
+import Controller.CustomerController;
 import Controller.ReservationController;
 import Controller.StaffController;
 import Model.Customer;
@@ -30,8 +30,8 @@ import java.awt.Font;
 public class Booking {
     JTextField inputLebih;
     ReservationController reservationController = new ReservationController();
-    StaffController staffController = new StaffController();
-    LoginController loginController = new LoginController();
+        StaffController staffController = new StaffController();
+        CustomerController loginController = new CustomerController();
 
     public Booking(Customer customer, int selectedCabangHotel) {
         JFrame f = new JFrame("Booking");

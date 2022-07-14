@@ -173,7 +173,7 @@ public class StaffMainMenu {
         JFrame frameShowVouchers = new JFrame("Show Vouchers");
         frameShowVouchers.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         JPanel panelShowVouchers = new JPanel();
-        var dataTabelVoucher = StaffController.getAllVouchers();
+        var dataTabelVoucher = StaffController.getAllVoucher();
         if (!dataTabelVoucher.isEmpty()) {
             String[] columnNames = {"ID Voucher", "Nama Voucher", "Persen Voucher"};
             String[][] data = new String[dataTabelVoucher.size()][dataTabelVoucher.get(0).size()];

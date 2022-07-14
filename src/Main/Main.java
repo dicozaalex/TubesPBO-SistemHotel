@@ -5,8 +5,7 @@
  */
 package Main;
 import Controller.ConnectDatabase;
-import InitDatabase.CreateTable;
-import InitDatabase.DummyDatabase;
+import InitDatabase.*;
 import View.Login;
 /**
  *
@@ -15,7 +14,7 @@ import View.Login;
 public class Main {
     public static void main(String[] args) {
         // new CreateTable();
-        // new DummyDatabase();
+//        new DummyDatabase();
         new Login();
     }
 }
