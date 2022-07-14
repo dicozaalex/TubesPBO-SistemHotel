@@ -1,24 +1,24 @@
 package View;
 
-import Controller.LoginController;
+import Controller.CustomerController;
 import javax.swing.*;
-
-import com.mysql.cj.xdevapi.SelectStatement;
 
 import java.awt.event.*;
 import Model.Customer;
-
+import java.awt.Font;
 public class CheckSaldo {
     public CheckSaldo(Customer customer, int selectedCabangHotel) {
-
         JFrame f = new JFrame("Check Saldo");
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
         JLabel menuLabel = new JLabel("Please Select Your Menu");
 
+      
+        welcomeLabel.setFont(new Font("Arial", Font.ITALIC, 20));
         welcomeLabel.setBounds(100, 20, 300, 20);
         f.add(welcomeLabel);
 
-        menuLabel.setBounds(20, 90, 300, 20);
+        menuLabel.setFont(new Font("Arial", Font.ITALIC, 15));
+        menuLabel.setBounds(20, 50, 300, 20);
         f.add(menuLabel);
 
         JLabel saldoLabel = new JLabel("Saldo Anda: " + customer.getSaldoWallet());
@@ -58,10 +58,13 @@ public class CheckSaldo {
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
         JLabel menuLabel = new JLabel("Please Select Your Menu");
 
+        
+        welcomeLabel.setFont(new Font("Arial", Font.ITALIC, 20));
         welcomeLabel.setBounds(100, 20, 300, 20);
         f.add(welcomeLabel);
 
-        menuLabel.setBounds(20, 90, 300, 20);
+        menuLabel.setFont(new Font("Arial", Font.ITALIC, 15));
+        menuLabel.setBounds(20, 50, 300, 20);
         f.add(menuLabel);
 
         JLabel cardLabel = new JLabel("Masukkan Nomor Kartu Anda");
@@ -97,15 +100,20 @@ public class CheckSaldo {
                 String card = cardField.getText();
                 String pin = pinField.getText();
                 double saldo = Double.parseDouble(saldoField.getText());
-                LoginController loginController = new LoginController();
-                boolean cekTopUp = loginController.topUp(card, pin, saldo, customer.getUsername(),
-                        customer.getSaldoWallet());
-                if (cekTopUp) {
-                    JOptionPane.showMessageDialog(null, "Top Up Success");
-                    f.dispose();
-                    new CustomerMainMenu(customer, selectedCabangHotel);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Top Up Failed");
+                CustomerController loginController = new CustomerController();
+                boolean cekCardNumber = loginController.cekCardNumber(card, pin);
+                if (cekCardNumber) {
+                    boolean cekTopUp = loginController.topUp(saldo, customer.getUsername(),
+                            customer.getSaldoWallet(), card);
+                    if (cekTopUp) {
+                        JOptionPane.showMessageDialog(null, "Top Up Success");
+                        f.dispose();
+                        new CustomerMainMenu(customer, selectedCabangHotel);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Top Up Failed");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Card Number or PIN Wrong");
                 }
             }
         });

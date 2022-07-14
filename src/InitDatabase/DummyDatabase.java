@@ -62,17 +62,17 @@ public class DummyDatabase {
         listRoom1.add(room2);
         listRoom2.add(room3);
         listRoom2.add(room4);
-//        insertATM();
-//        insertBoss();
-//        insertCabang();
-//        insertCustomer();
-//        insertExtra();
-//        insertJenisRoom();
-//        insertManager();
-//        insertRoom();
-//        insertStaff();
+        insertATM();
+        insertBoss();
+        insertCabang();
+        insertCustomer();
+        insertExtra();
+        insertJenisRoom();
+        insertManager();
+        insertRoom();
+        insertStaff();
         insertUsers();
-//        insertVoucher();
+        insertVoucher();
         conn.disconnect();
     }
 

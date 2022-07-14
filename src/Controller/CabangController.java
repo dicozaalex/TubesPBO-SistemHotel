@@ -36,8 +36,7 @@ public class CabangController {
         conn.disconnect();
         return count;
     }
-
-    public static ArrayList<CabangHotel> getAllCabangs() {
+ public static ArrayList<CabangHotel> getAllCabangs() {
         ArrayList<CabangHotel> cabangs = new ArrayList<>();
         conn.connect();
         String query = "SELECT * FROM cabang";
@@ -56,5 +55,4 @@ public class CabangController {
         }
         return (cabangs);
     }
-    
 }

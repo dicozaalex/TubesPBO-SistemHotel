@@ -1,10 +1,11 @@
 package View;
 
-import java.awt.*;
-import java.awt.event.*;
+import Model.Customer;
 
 import javax.swing.*;
-import Model.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CustomerMainMenu {
     public CustomerMainMenu(Customer customer, int selectedCabangHotel) {
@@ -17,7 +18,7 @@ public class CustomerMainMenu {
         f.add(welcomeLabel);
 
         menuLabel.setFont(new Font("Arial", Font.ITALIC, 15));
-        menuLabel.setBounds(20, 90, 300, 20);
+        menuLabel.setBounds(20, 50, 300, 20);
         f.add(menuLabel);
 
         JButton bookButton = new JButton("1. Book");
@@ -47,6 +48,7 @@ public class CustomerMainMenu {
         f.add(logoutButton);
 
         bookButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new Booking(customer, selectedCabangHotel);
                 f.dispose();
@@ -54,6 +56,7 @@ public class CustomerMainMenu {
         });
 
         memberButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new JoinMember(customer, selectedCabangHotel);
                 f.dispose();
@@ -61,6 +64,7 @@ public class CustomerMainMenu {
         });
 
         saldoButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new CheckSaldo(customer, selectedCabangHotel);
                 f.dispose();
@@ -68,6 +72,7 @@ public class CustomerMainMenu {
         });
 
         updateButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new UpdateProfile(customer, selectedCabangHotel);
                 f.dispose();
@@ -75,6 +80,7 @@ public class CustomerMainMenu {
         });
 
         backButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new CustomerBranchMenu(customer);
                 f.dispose();
@@ -82,6 +88,7 @@ public class CustomerMainMenu {
         });
 
         logoutButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new Login();
                 f.dispose();
