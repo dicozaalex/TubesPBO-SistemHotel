@@ -114,7 +114,38 @@ public class LoginController {
         return (customer);
     }
 
-    public boolean topUp(String cardNumber, String pin, double saldo, String username, double saldoAwal) {
+    public static ArrayList<ATMCard> getAllATM() {
+        ArrayList<ATMCard> atmCards = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM customer";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                ATMCard atmCard = new ATMCard();
+                atmCard.setCardNumber(rs.getString("cardNumber"));
+                atmCard.setSaldo(rs.getDouble("saldo"));
+                atmCard.setPin(rs.getInt("pin"));
+                atmCards.add(atmCard);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (atmCards);
+    }
+
+    public boolean cekCardNumber(String cardNumber, String pin){
+        conn.connect();
+        ArrayList<ATMCard> atmCards = getAllATM();
+        for (int i = 0; i < atmCards.size(); i++) {
+            if (atmCards.get(i).getCardNumber().equals(cardNumber) && atmCards.get(i).getPin() == Integer.parseInt(pin)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean topUp(double saldo, String username, double saldoAwal) {
         conn.connect();
         String query = "UPDATE customer SET saldoWallet=? WHERE userName=?";
         try {
