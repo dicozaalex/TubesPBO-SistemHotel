@@ -214,6 +214,8 @@ public class Booking {
                 boolean cekVoucher = staffController.cekVoucher(voucher);
                 if (cekVoucher) {
                     JOptionPane.showMessageDialog(null, "Voucher Valid");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Voucher Invalid");
                 }
                 double totalHargaRoom = reservationController.cekHarga(selectedCabangHotel, member, jenisRoom,
                         addExtraCheckBox, voucher, customer, extras, lamaInap);
@@ -233,7 +235,7 @@ public class Booking {
         JLabel totalHargaLabel = new JLabel("Total Harga\n " + totalHargaRoom);
         totalHargaLabel.setBounds(20, 50, 300, 20);
         f.add(totalHargaLabel);
-
+        System.out.println(tanggalCheckIn);
         JButton confirmButton = new JButton("Confirm");
         confirmButton.setBounds(20, 80, 300, 30);
         f.add(confirmButton);
@@ -243,7 +245,8 @@ public class Booking {
                 boolean cekSaldo = reservationController.cekSaldoBayar(customer, totalHargaRoom);
                 if (cekSaldo) {
                     JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
-                    reservationController.setTransaksi(customer, tanggalCheckIn, lamaInap, banyakOrang, idRoom, totalHargaRoom);
+//                    String tanggalCheckOut = ;
+//                    reservationController.setTransaksi(customer, tanggalCheckIn, tanggalCheckOut, banyakOrang, idRoom, totalHargaRoom);
                 } else {
                     JOptionPane.showMessageDialog(null, "Pembayaran Gagal");
                 }
