@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 
 public class CabangController {
     
-    static ConnectDatabase conn=new ConnectDatabase();
+    static ConnectDatabase conn= SingletonDatabase.getConnectObject();
 
     
     public int countCabang(){

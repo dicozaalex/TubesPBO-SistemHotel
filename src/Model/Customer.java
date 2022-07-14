@@ -22,11 +22,21 @@ public class Customer extends User {
 
     }
     
-    public Customer(String username, String firstname, String lastname, String password, String email, String telp,
-            EnumStatusUser status, int idCustomer, double saldoWallet, EnumMember statusMember,
+    public Customer(int idCustomer, String username, String firstname, String lastname, String password, String email, String telp,
+            EnumStatusUser status, double saldoWallet, EnumMember statusMember,
             ArrayList<Reservation> listTransaksi, ATMCard atmCard) {
         super(username, firstname, lastname, password, email, telp, status);
+        this.saldoWallet = saldoWallet;
+        this.statusMember = statusMember;
+        this.listTransaksi = listTransaksi;
+        this.atmCard = atmCard;
         this.idCustomer = idCustomer;
+    }
+    
+    public Customer(String username, String firstname, String lastname, String password, String email, String telp,
+            EnumStatusUser status, double saldoWallet, EnumMember statusMember,
+            ArrayList<Reservation> listTransaksi, ATMCard atmCard) {
+        super(username, firstname, lastname, password, email, telp, status);
         this.saldoWallet = saldoWallet;
         this.statusMember = statusMember;
         this.listTransaksi = listTransaksi;
