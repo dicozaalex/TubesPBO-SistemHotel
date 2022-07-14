@@ -9,8 +9,7 @@ public class Voucher {
 
     }
 
-    public Voucher(int idVoucher, String namaVoucher, double persenVoucher) {
-        this.idVoucher = idVoucher;
+    public Voucher(String namaVoucher, double persenVoucher) {
         this.namaVoucher = namaVoucher;
         this.persenVoucher = persenVoucher;
     }
