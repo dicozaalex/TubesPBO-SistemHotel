@@ -176,5 +176,15 @@ public class StaffController {
         }
         return vouchers;
     }
+
+    public boolean cekVoucher(String voucher){
+        ArrayList<Voucher> vouchers = getAllVoucher();
+        for (Voucher v : vouchers) {
+            if (v.getNamaVoucher().equals(voucher)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

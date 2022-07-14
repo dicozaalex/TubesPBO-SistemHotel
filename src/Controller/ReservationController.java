@@ -28,7 +28,7 @@ public class ReservationController {
                 jenisRoom.setIdJenisRoom(resultSet.getInt("idJenisRoom"));
                 jenisRoom.setIdCabang(resultSet.getInt("idCabang"));
                 jenisRoom.setJenisRoom(resultSet.getString("jenisRoom"));
-                jenisRoom.setMaksimalOrang(resultSet.getInt("maksimalOrang"));
+                jenisRoom.setMaksimalOrang(resultSet.getInt("maksOrang"));
                 jenisRoom.setHargaRoom(resultSet.getInt("harga"));
                 jenisRooms.add(jenisRoom);
             }
@@ -77,6 +77,8 @@ public class ReservationController {
         }
         return false;
     }
+    
+    
 
     public double cekHarga(int selectedCabangHotel, boolean member, String jenisRoom, JCheckBox addExtraCheckBox[],
             String voucher, Customer customer, ArrayList<Extra> extras) {
