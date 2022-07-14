@@ -16,7 +16,6 @@ public class Main {
     public static void main(String[] args) {
         // new CreateTable();
         // new DummyDatabase();
-        //new Login();
-        new Login2();
+        new Login();
     }
 }

@@ -59,7 +59,7 @@ public class Register {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginController c = new LoginController();
+                CustomerController c = new CustomerController();
 
                 String username = inputUserName.getText();
                 boolean cekUsername = c.cekUsername(username);
