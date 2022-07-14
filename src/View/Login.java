@@ -74,7 +74,7 @@ public class Login extends JFrame implements ActionListener {
                     Customer customer = cusc.getCustomer(cekUsername);
                     new CustomerBranchMenu(customer);
                 }else if(valueReturn[0].equals("staff")){
-//                    new StaffMainMenu();
+                   new StaffMainMenu();
                 }else if(valueReturn[0].equals("manager")){
 //                    new ManagerMainMenu();
                 }else if(valueReturn[0].equals("boss")){

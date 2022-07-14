@@ -229,6 +229,7 @@ public class StaffMainMenu {
         });
         frameAddVoucher.add(panelAddVoucher);
         frameAddVoucher.pack();
+        frameAddVoucher.setSize(200,200);
 
         JFrame frameDeleteVoucher = new JFrame("Delete Voucher");
         frameDeleteVoucher.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -245,11 +246,12 @@ public class StaffMainMenu {
             }
             frameDeleteVoucher.dispose();
         });
-        idVoucher.setPreferredSize(new Dimension(300, 25));
+        idVoucher.setPreferredSize(new Dimension(200, 25));
         panelDeleteVoucher.add(labelIdVoucher);
         panelDeleteVoucher.add(idVoucher);
         panelDeleteVoucher.add(submitDeleteVoucher);
         frameDeleteVoucher.add(panelDeleteVoucher);
+        frameDeleteVoucher.setSize(300,200);
 
         manageExtras.addActionListener(e -> {
             frame3.setVisible(true);
