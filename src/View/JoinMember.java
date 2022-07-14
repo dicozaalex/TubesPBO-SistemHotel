@@ -25,7 +25,6 @@ public class JoinMember {
             JLabel benefitLabel = new JLabel("Benefit Membership");
             benefitLabel.setBounds(20, 120, 300, 20);
             f.add(benefitLabel);
-
             ArrayList<Extra> benefit = staffController.getExtras(selectedCabangHotel);
             double price = 0;
             for (int i = 0; i < benefit.size(); i++) {
