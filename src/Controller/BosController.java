@@ -43,17 +43,20 @@ public class BosController {
         conn.connect();
         try {
             Statement stmt = conn.con.createStatement();
-            stmt.executeQuery(queryCabang);
+            stmt.executeUpdate(queryCabang);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        
         int idCabang = 0;
-        String queryGetIdCabang = "SELECT idCabang FROM cabang WHERE lokasiCabang=" + lokasiCabang + " AND alamatCabang=" + alamatCabang + ")";
+        String queryGetIdCabang = "SELECT idCabang FROM cabang WHERE lokasiCabang='" + lokasiCabang + "' AND alamatCabang='" + alamatCabang+ "'";
+        
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(queryGetIdCabang);
-            idCabang = rs.getInt("idCabang");
+            while (rs.next()) {
+                idCabang = rs.getInt("idCabang");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,31 +69,36 @@ public class BosController {
         String email = manager.getEmail();
         String queryManager = "INSERT INTO manager(idCabang, firstName, lastName, userName, password, telepon, email, statusUser)"
                 + "VALUES('" + idCabang + "','" + firstName + "','" + lastName + "','" + username + "','" + password + "','" + telepon + "','" + email + "','MANAGER')";
+        
         try {
             Statement stmt = conn.con.createStatement();
-            stmt.executeQuery(queryManager);
+            stmt.executeUpdate(queryManager);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         int idJenisUser = 0;
-        String queryGetIdJenisUser = "SELECT idManager FROM manager WHERE userName=" + username;
+        String queryGetIdJenisUser = "SELECT idManager FROM manager WHERE userName='" + username+"'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(queryGetIdJenisUser);
-            idJenisUser = rs.getInt("idJenisUser");
+            while (rs.next()) {
+                idJenisUser = rs.getInt("idManager");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         String queryUser = "INSERT INTO users(idJenisUser,userName,password,statusUser)"
-                + "VALUES('" + idJenisUser + "'+" + username + "','" + password + "','MANAGER')";
+                + "VALUES('" + idJenisUser + "','" + username + "','" + password + "','MANAGER')";
+        
         try {
             Statement stmt = conn.con.createStatement();
-            stmt.executeQuery(queryUser);
+            stmt.executeUpdate(queryUser);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        conn.disconnect();
         return "";
     }
 }
