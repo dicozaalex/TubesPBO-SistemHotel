@@ -214,8 +214,6 @@ public class Booking {
                 boolean cekVoucher = staffController.cekVoucher(voucher);
                 if (cekVoucher) {
                     JOptionPane.showMessageDialog(null, "Voucher Valid");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Voucher Invalid");
                 }
                 double totalHargaRoom = reservationController.cekHarga(selectedCabangHotel, member, jenisRoom,
                         addExtraCheckBox, voucher, customer, extras, lamaInap);
