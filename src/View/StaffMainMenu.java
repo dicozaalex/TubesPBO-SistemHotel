@@ -84,7 +84,7 @@ public class StaffMainMenu {
         JFrame frameShowExtras = new JFrame("Show Extras");
         frameShowExtras.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         JPanel panelShowExtras = new JPanel();
-        var dataTabel = StaffController.getAllExtras();
+        List<List<String>> dataTabel = StaffController.getAllExtras();
         if (!dataTabel.isEmpty()) {
             String[] columnNames = {"ID Extra", "ID Cabang", "Nama Extra", "Harga Extra"};
             String[][] data = new String[dataTabel.size()][dataTabel.get(0).size()];

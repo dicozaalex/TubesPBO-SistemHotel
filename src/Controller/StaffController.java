@@ -209,5 +209,16 @@ public class StaffController {
         }
         return false;
     }
+    public static String[] getIdCabang(ArrayList<CabangHotel> cabangHotels) {
+        ArrayList<Integer> ids = new ArrayList<>();
+        for (int i = 0; i < cabangHotels.size(); i++) {
+            ids.add(cabangHotels.get(i).getIdCabang());
+        }
+        String[] allIdCabang = new String[ids.size()];
+        for (int i = 0; i < allIdCabang.length; i++) {
+            allIdCabang[i] = String.valueOf(ids.get(i));
+        }
+        return allIdCabang;
+    }
 }
 
