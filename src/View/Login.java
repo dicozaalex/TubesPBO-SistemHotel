@@ -79,6 +79,7 @@ public class Login extends JFrame implements ActionListener {
                 }else if(valueReturn.equals("manager")){
 //                    new ManagerMainMenu();
                 }else if(valueReturn.equals("boss")){
+                    bos.setUsername(cekUsername);
                     new BossMainMenu(bos.getUsername());
                 }
                 
