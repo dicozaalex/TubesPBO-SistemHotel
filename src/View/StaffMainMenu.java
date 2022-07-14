@@ -162,6 +162,7 @@ public class StaffMainMenu {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
+            frameDeleteExtras.dispose();
         });
         panelDeleteExtras.add(labelAja);
         panelDeleteExtras.add(idExtra);
@@ -230,7 +231,25 @@ public class StaffMainMenu {
         frameAddVoucher.pack();
 
         JFrame frameDeleteVoucher = new JFrame("Delete Voucher");
-
+        frameDeleteVoucher.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        JPanel panelDeleteVoucher = new JPanel();
+        JLabel labelIdVoucher = new JLabel("ID Voucher");
+        JTextField idVoucher = new JFormattedTextField();
+        JButton submitDeleteVoucher = new JButton("Submit");
+        submitDeleteVoucher.addActionListener(e -> {
+            try {
+                StaffController.deleteVoucher(Integer.parseInt(idVoucher.getText()));
+                JOptionPane.showMessageDialog(null, "Delete Voucher dengan ID " + idVoucher.getText() + " berhasil!");
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "Gagal delete voucher! " + exception.getMessage());
+            }
+            frameDeleteVoucher.dispose();
+        });
+        idVoucher.setPreferredSize(new Dimension(300, 25));
+        panelDeleteVoucher.add(labelIdVoucher);
+        panelDeleteVoucher.add(idVoucher);
+        panelDeleteVoucher.add(submitDeleteVoucher);
+        frameDeleteVoucher.add(panelDeleteVoucher);
 
         manageExtras.addActionListener(e -> frame3.setVisible(true));
         manageVoucher.addActionListener(e -> {
@@ -243,14 +262,11 @@ public class StaffMainMenu {
 
         showVouchers.addActionListener(e -> frameShowVouchers.setVisible(true));
         addVoucher.addActionListener(e -> frameAddVoucher.setVisible(true));
+        deleteVoucher.addActionListener(e -> frameDeleteVoucher.setVisible(true));
 
         frame.setSize(400, 400);
         frame2.setSize(400, 400);
         frame3.setSize(400, 400);
-    }
-
-    public static void main(String[] args) {
-        new StaffMainMenu();
     }
 
 }

@@ -14,6 +14,26 @@ import java.util.List;
 public class StaffController {
     static ConnectDatabase conn = SingletonDatabase.getConnectObject();
 
+    public static ArrayList<Voucher> getAllVoucher() {
+        ArrayList<Voucher> vouchers = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM voucher";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet resultSet = stmt.executeQuery(query);
+            while(resultSet.next()) {
+                Voucher voucher = new Voucher();
+                voucher.setIdVoucher(resultSet.getInt("idVoucher"));
+                voucher.setNamaVoucher(resultSet.getString("namaVoucher"));
+                voucher.setPersenVoucher(resultSet.getDouble("persenVoucher"));
+                vouchers.add(voucher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+        }
+        return vouchers;
+    }
     public static Voucher getVoucher(String namaVoucher) {
         Voucher voucher = new Voucher();
         conn.connect();
