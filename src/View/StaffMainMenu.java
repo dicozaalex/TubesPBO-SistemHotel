@@ -268,5 +268,4 @@ public class StaffMainMenu {
         frame2.setSize(400, 400);
         frame3.setSize(400, 400);
     }
-
 }
