@@ -21,7 +21,7 @@ public class StaffController {
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet resultSet = stmt.executeQuery(query);
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Voucher voucher = new Voucher();
                 voucher.setIdVoucher(resultSet.getInt("idVoucher"));
                 voucher.setNamaVoucher(resultSet.getString("namaVoucher"));
@@ -34,6 +34,8 @@ public class StaffController {
         }
         return vouchers;
     }
+
+
     public static Voucher getVoucher(String namaVoucher) {
         Voucher voucher = new Voucher();
         conn.connect();
