@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import Model.*;
 
 public class LoginController {
-    static ConnectDatabase conn = new ConnectDatabase();
+    static ConnectDatabase conn = SingletonDatabase.getConnectObject();
 
     public LoginController() {
     }

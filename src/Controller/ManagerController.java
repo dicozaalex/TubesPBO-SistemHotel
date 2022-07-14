@@ -62,7 +62,8 @@ public class ManagerController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String query = "INSERT INTO staff VALUES(?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO staff (idCabang, firstName, lastName, userName, password, telepon, email, statusUser, gaji)"
+                + " VALUES(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, staff.getIdCabang());

@@ -16,10 +16,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class BosController {
-
-    ConnectDatabase conn = new ConnectDatabase();
-
-    public ArrayList<Double> viewPendapatanTotal() {
+    
+    ConnectDatabase conn = SingletonDatabase.getConnectObject();
+    public ArrayList<Double> viewPendapatanTotal(){
         ArrayList<Double> listTotalPerCabang = new ArrayList<>();
         int i = 1;
         CabangController cabang = new CabangController();
