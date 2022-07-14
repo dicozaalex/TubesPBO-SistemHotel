@@ -21,7 +21,7 @@ public class StaffController {
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet resultSet = stmt.executeQuery(query);
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Voucher voucher = new Voucher();
                 voucher.setIdVoucher(resultSet.getInt("idVoucher"));
                 voucher.setNamaVoucher(resultSet.getString("namaVoucher"));
@@ -34,6 +34,8 @@ public class StaffController {
         }
         return vouchers;
     }
+
+
     public static Voucher getVoucher(String namaVoucher) {
         Voucher voucher = new Voucher();
         conn.connect();
@@ -200,7 +202,43 @@ public class StaffController {
             return false;
         }
     }
-    public boolean cekVoucher(String voucher){
+
+    public static List<List<String>> getAllVouchers() {
+        List<List<String>> hasil = new ArrayList<>();
+        List<String> voucher = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM voucher";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                voucher.clear();
+                voucher.add(String.valueOf(resultSet.getInt("idVoucher")));
+                voucher.add(resultSet.getString("namaVoucher"));
+                voucher.add(String.valueOf(resultSet.getDouble("persenVoucher")));
+                hasil.add(voucher);
+            }
+            conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+        }
+        return hasil;
+    }
+
+    public static String[] getIdCabang(ArrayList<CabangHotel> cabangHotels) {
+        ArrayList<Integer> ids = new ArrayList<>();
+        for (int i = 0; i < cabangHotels.size(); i++) {
+            ids.add(cabangHotels.get(i).getIdCabang());
+        }
+        String[] allIdCabang = new String[ids.size()];
+        for (int i = 0; i < allIdCabang.length; i++) {
+            allIdCabang[i] = String.valueOf(ids.get(i));
+        }
+        return allIdCabang;
+    }
+
+    public boolean cekVoucher(String voucher) {
         ArrayList<Voucher> vouchers = getAllVoucher();
         for (Voucher v : vouchers) {
             if (v.getNamaVoucher().equals(voucher)) {

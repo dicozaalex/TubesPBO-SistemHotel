@@ -30,8 +30,8 @@ import java.awt.Font;
 public class Booking {
     JTextField inputLebih;
     ReservationController reservationController = new ReservationController();
-        StaffController staffController = new StaffController();
-        CustomerController loginController = new CustomerController();
+    StaffController staffController = new StaffController();
+    CustomerController loginController = new CustomerController();
 
     public Booking(Customer customer, int selectedCabangHotel) {
         JFrame f = new JFrame("Booking");
@@ -244,6 +244,7 @@ public class Booking {
                 boolean cekSaldo = reservationController.cekSaldoBayar(customer, totalHargaRoom);
                 if (cekSaldo) {
                     JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
+                    // reservationController.setTransaksi(customer, tanggalCheckIn, tanggalCheckOut, banyakOrang, idRoom, totalHarga);
                 } else {
                     JOptionPane.showMessageDialog(null, "Pembayaran Gagal");
                 }

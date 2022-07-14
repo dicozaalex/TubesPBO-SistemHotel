@@ -100,8 +100,8 @@ public class CheckSaldo {
                 String card = cardField.getText();
                 String pin = pinField.getText();
                 double saldo = Double.parseDouble(saldoField.getText());
-                CustomerController customerController = new CustomerController();
-                boolean cekCardNumber = customerController.cekCardNumber(card, pin);
+                CustomerController loginController = new CustomerController();
+                boolean cekCardNumber = loginController.cekCardNumber(card, pin);
                 if (cekCardNumber) {
                     boolean cekTopUp = customerController.topUp(saldo, customer.getUsername(),
                             customer.getSaldoWallet(), card);

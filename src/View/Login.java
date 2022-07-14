@@ -60,27 +60,25 @@ public class Login extends JFrame implements ActionListener {
         if (e.getSource() == loginButton) {
             LoginController logc = new LoginController();
             CustomerController cusc = new CustomerController();
-            Boss bos = new Boss();
             String cekUsername = inputUserName.getText();
             String cekPassword = inputPassword.getText();
-            String valueReturn = logc.login(cekUsername, cekPassword);
+            String[] valueReturn = logc.login(cekUsername, cekPassword);
             boolean berhasil = false;
-            if (!valueReturn.equals("")) {
+            if (!valueReturn[0].equals("") && !valueReturn[1].equals("")) {
                 berhasil = true;
             }
             if (berhasil) {
                 JOptionPane.showMessageDialog(null, "Login Success");
                 f.dispose();
-                if (valueReturn.equals("customer")) {
+                if (valueReturn[0].equals("customer")) {
                     Customer customer = cusc.getCustomer(cekUsername);
                     new CustomerBranchMenu(customer);
-                }else if(valueReturn.equals("staff")){
-//                    new StaffMainMenu();
-                }else if(valueReturn.equals("manager")){
+                }else if(valueReturn[0].equals("staff")){
+                   new StaffMainMenu();
+                }else if(valueReturn[0].equals("manager")){
 //                    new ManagerMainMenu();
-                }else if(valueReturn.equals("boss")){
-                    bos.setUsername(cekUsername);
-                    new BossMainMenu(cekUsername);
+                }else if(valueReturn[0].equals("boss")){
+                    new BossMainMenu();
                 }
                 
             } else {

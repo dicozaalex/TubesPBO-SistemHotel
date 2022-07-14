@@ -10,6 +10,7 @@ import Model.Voucher;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StaffMainMenu {
     public StaffMainMenu() {
@@ -128,7 +129,6 @@ public class StaffMainMenu {
                 throw new RuntimeException(ex);
             }
             frameAddExtra.dispose();
-            new StaffMainMenu();
         });
         GroupLayout layout = new GroupLayout(panel);
         panel.setLayout(layout);
@@ -173,13 +173,13 @@ public class StaffMainMenu {
         JFrame frameShowVouchers = new JFrame("Show Vouchers");
         frameShowVouchers.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         JPanel panelShowVouchers = new JPanel();
-        var dataTabelVoucher = StaffController.getAllVoucher();
+        List<List<String>> dataTabelVoucher = StaffController.getAllVouchers();
         if (!dataTabelVoucher.isEmpty()) {
             String[] columnNames = {"ID Voucher", "Nama Voucher", "Persen Voucher"};
             String[][] data = new String[dataTabelVoucher.size()][dataTabelVoucher.get(0).size()];
-            for (int i = 0; i < dataTabel.size(); i++) {
-                for (int j = 0; j < dataTabel.get(i).size(); j++) {
-                    data[i][j] = dataTabel.get(i).get(j);
+            for (int i = 0; i < dataTabelVoucher.size(); i++) {
+                for (int j = 0; j < dataTabelVoucher.get(i).size(); j++) {
+                    data[i][j] = dataTabelVoucher.get(i).get(j);
                 }
             }
             JTable tabelVouchers = new JTable(data, columnNames);
@@ -229,6 +229,7 @@ public class StaffMainMenu {
         });
         frameAddVoucher.add(panelAddVoucher);
         frameAddVoucher.pack();
+        frameAddVoucher.setSize(200,200);
 
         JFrame frameDeleteVoucher = new JFrame("Delete Voucher");
         frameDeleteVoucher.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -245,13 +246,17 @@ public class StaffMainMenu {
             }
             frameDeleteVoucher.dispose();
         });
-        idVoucher.setPreferredSize(new Dimension(300, 25));
+        idVoucher.setPreferredSize(new Dimension(200, 25));
         panelDeleteVoucher.add(labelIdVoucher);
         panelDeleteVoucher.add(idVoucher);
         panelDeleteVoucher.add(submitDeleteVoucher);
         frameDeleteVoucher.add(panelDeleteVoucher);
+        frameDeleteVoucher.setSize(300,200);
 
-        manageExtras.addActionListener(e -> frame3.setVisible(true));
+        manageExtras.addActionListener(e -> {
+            frame3.setVisible(true);
+            frame.dispose();
+        });
         manageVoucher.addActionListener(e -> {
             frame2.setVisible(true);
             frame.dispose();

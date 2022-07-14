@@ -1,6 +1,5 @@
 package Controller;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,8 @@ public class CustomerController {
 
     public CustomerController() {
     }
- public boolean cekUsername(String username) {
+
+    public boolean cekUsername(String username) {
         conn.connect();
         ArrayList<Customer> customers = getAllCustomers();
         for (int i = 0; i < customers.size(); i++) {
@@ -75,7 +75,7 @@ public class CustomerController {
     public static ArrayList<ATMCard> getAllATM() {
         ArrayList<ATMCard> atmCards = new ArrayList<>();
         conn.connect();
-        String query = "SELECT * FROM customer";
+        String query = "SELECT * FROM atm";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -92,18 +92,40 @@ public class CustomerController {
         return (atmCards);
     }
 
-    public boolean cekCardNumber(String cardNumber, String pin){
+    public boolean cekCardNumber(String cardNumber, String pin) {
         conn.connect();
         ArrayList<ATMCard> atmCards = getAllATM();
         for (int i = 0; i < atmCards.size(); i++) {
-            if (atmCards.get(i).getCardNumber().equals(cardNumber) && atmCards.get(i).getPin() == Integer.parseInt(pin)) {
+            if (atmCards.get(i).getCardNumber().equals(cardNumber)
+                    && atmCards.get(i).getPin() == Integer.parseInt(pin)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean topUp(double saldo, String username, double saldoAwal) {
+    public void setSaldoAtm(double saldo, String cardNumber) {
+        double saldoAwal = 0;
+        ArrayList<ATMCard> atmCards = getAllATM();
+        for (int i = 0; i < atmCards.size(); i++) {
+            if (atmCards.get(i).getCardNumber().equals(cardNumber)) {
+                saldoAwal = atmCards.get(i).getSaldo();
+                break;
+            }
+        }
+        conn.connect();
+        String query = "UPDATE atm SET saldo=? WHERE cardNumber=?";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setDouble(1, saldoAwal - saldo);
+            stmt.setString(2, cardNumber);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean topUp(double saldo, String username, double saldoAwal, String cardNumber) {
         conn.connect();
         String query = "UPDATE customer SET saldoWallet=? WHERE userName=?";
         try {
@@ -111,6 +133,8 @@ public class CustomerController {
             stmt.setDouble(1, saldoAwal + saldo);
             stmt.setString(2, username);
             stmt.executeUpdate();
+            getCustomer(username);
+            setSaldoAtm(saldo, cardNumber);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -181,7 +205,7 @@ public class CustomerController {
         }
     }
 
-    public boolean joinMembership(Customer customer, double price){
+    public boolean joinMembership(Customer customer, double price) {
         conn.connect();
         String query = "UPDATE customer SET statusMember=?, saldoWallet=? WHERE userName=?";
         try {
@@ -190,44 +214,6 @@ public class CustomerController {
             stmt.setDouble(2, customer.getSaldoWallet() - price);
             stmt.setString(3, customer.getUsername());
             stmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    public void setSaldoAtm(double saldo, String cardNumber) {
-        double saldoAwal = 0;
-        ArrayList<ATMCard> atmCards = getAllATM();
-        for (int i = 0; i < atmCards.size(); i++) {
-            if (atmCards.get(i).getCardNumber().equals(cardNumber)) {
-                saldoAwal = atmCards.get(i).getSaldo();
-                break;
-            }
-        }
-        conn.connect();
-        String query = "UPDATE atm SET saldo=? WHERE cardNumber=?";
-        try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setDouble(1, saldoAwal - saldo);
-            stmt.setString(2, cardNumber);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean topUp(double saldo, String username, double saldoAwal, String cardNumber) {
-        conn.connect();
-        String query = "UPDATE customer SET saldoWallet=? WHERE userName=?";
-        try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setDouble(1, saldoAwal + saldo);
-            stmt.setString(2, username);
-            stmt.executeUpdate();
-            getCustomer(username);
-            setSaldoAtm(saldo, cardNumber);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

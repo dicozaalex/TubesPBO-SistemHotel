@@ -11,13 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 /**
  *
  * @author calvi
  */
 public class LoginController {
+    static ConnectDatabase conn = SingletonDatabase.getConnectObject();
 
     public boolean cekUsername(String username) {
         conn.connect();
@@ -83,21 +83,27 @@ public class LoginController {
         }
     }
 
-    public String login(String username, String password) {
+    public String[] login(String username, String password) {
         conn.connect();
+        int urutanUser = 0;
         String jenisUser = "";
+        String[] returnValue = new String[2];
         String query = "SELECT * FROM users WHERE userName='" + username + "'&&password='" + password + "'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
+               urutanUser = rs.getInt("idJenisUser");
                jenisUser = rs.getString("statusUser");
             }
             jenisUser = jenisUser.toLowerCase();
+            String stringUrutan = String.valueOf(urutanUser);
+            returnValue[0] = jenisUser;
+            returnValue[1] = stringUrutan;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return jenisUser;
+        return returnValue;
     }
     
     public static String[] getAllUsername() {
