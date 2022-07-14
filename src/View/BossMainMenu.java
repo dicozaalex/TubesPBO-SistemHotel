@@ -9,19 +9,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import Controller.*;
+import Model.*;
+import java.awt.Font;
 
 public class BossMainMenu extends JFrame implements ActionListener {
 
     JFrame f = new JFrame("Menu Boss");
     BosController bosc = new BosController();
-    
+    Font judulFont = new Font("Serif", Font.BOLD, 36);
     JButton buttonPendapatan, buttonAddCabang,buttonExit;
+    JLabel helo;
 
-    BossMainMenu() {
+    BossMainMenu(String nama){
         
+        helo = new JLabel("Hello, "+nama);
+        helo.setFont(judulFont);
         buttonPendapatan = new JButton("View Pendapatan Total Cabang");
         buttonAddCabang = new JButton("Add Cabang Baru");
         buttonExit = new JButton("Exit");
+        helo.setBounds(30,50,230,40);
         buttonPendapatan.setBounds(60,120,260,40);
         buttonAddCabang.setBounds(60,180,260,40);
         buttonExit.setBounds(60,240,260,40);
@@ -29,6 +35,7 @@ public class BossMainMenu extends JFrame implements ActionListener {
         buttonAddCabang.addActionListener(this);
         buttonExit.addActionListener(this);
         
+        f.add(helo);
         f.add(buttonPendapatan);
         f.add(buttonAddCabang);
         f.add(buttonExit);
@@ -52,8 +59,5 @@ public class BossMainMenu extends JFrame implements ActionListener {
         if(e.getSource()==buttonExit){
             f.dispose();
         }
-    }
-    public static void main(String[] args) {
-        new BossMainMenu();
     }
 }

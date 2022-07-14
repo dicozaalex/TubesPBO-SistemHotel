@@ -7,6 +7,7 @@ package View;
 
 import javax.swing.*;
 import java.awt.event.*;
+import Model.*;
 public class AddCabangBaru extends JFrame implements ActionListener{
     JFrame f = new JFrame("Add Cabang");
     JLabel labLokasi, labAlamat, errormessage;
@@ -63,7 +64,8 @@ public class AddCabangBaru extends JFrame implements ActionListener{
         }
         if(e.getSource() == buttonBack){
             f.dispose();
-            new BossMainMenu();
+            Boss bos = new Boss();
+            new BossMainMenu(bos.getUsername());
         }
     }
 }
