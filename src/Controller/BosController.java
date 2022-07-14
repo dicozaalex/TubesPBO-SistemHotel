@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class BosController {
     
-    ConnectDatabase conn = new ConnectDatabase();
+    ConnectDatabase conn = SingletonDatabase.getConnectObject();
     public ArrayList<Double> viewPendapatanTotal(){
         ArrayList<Double> listTotalPerCabang = new ArrayList<>();
         int i = 1;
