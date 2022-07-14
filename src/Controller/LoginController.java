@@ -1,23 +1,29 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controller;
 
+import static Controller.CustomerController.conn;
+import Model.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import Model.*;
 
+/**
+ *
+ * @author calvi
+ */
 public class LoginController {
-    static ConnectDatabase conn = SingletonDatabase.getConnectObject();
-
-    public LoginController() {
-    }
 
     public boolean cekUsername(String username) {
         conn.connect();
-        ArrayList<Customer> customers = getAllCustomers();
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getUsername().equals(username)) {
+        String[] users = getAllUsername();
+        for (int i = 0; i < users.length; i++) {
+            if (users.equals(username)) {
                 return false;
             }
         }
@@ -27,6 +33,7 @@ public class LoginController {
     public boolean register(String username, String firstname, String lastname, String password, String email,
             String phone) {
         conn.connect();
+        int berhasil=0,idLastCustomer = 0;
         String query = "INSERT INTO customer (firstName, lastName,userName, password, telepon, email, statusUser, statusMember, saldoWallet) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
@@ -40,225 +47,92 @@ public class LoginController {
             stmt.setString(8, "NOT_MEMBER");
             stmt.setDouble(9, 0);
             stmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    public boolean login(String username, String password) {
-        conn.connect();
-        String query = "SELECT * FROM customer WHERE userName='" + username + "'&&password='" + password + "'";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                if (rs.getString("userName").equals(username) && rs.getString("password").equals(password)) {
-                    return true;
-                }
-            }
-
+            berhasil++;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
-    }
-
-    public static ArrayList<Customer> getAllCustomers() {
-        ArrayList<Customer> customers = new ArrayList<>();
-        conn.connect();
-        String query = "SELECT * FROM customer";
+        String query2 = "SELECT idCustomer FROM customer WHERE userName=?";
         try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                Customer customer = new Customer();
-                customer.setIdCustomer(rs.getInt("idCustomer"));
-                customer.setFirstname(rs.getString("firstName"));
-                customer.setLastname(rs.getString("lastName"));
-                customer.setUsername(rs.getString("userName"));
-                customer.setPassword(rs.getString("password"));
-                customer.setEmail(rs.getString("email"));
-                customer.setTelp(rs.getString("telepon"));
-                customer.setSaldoWallet(rs.getDouble("saldoWallet"));
-                customers.add(customer);
+            PreparedStatement stmt = conn.con.prepareStatement(query2);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                idLastCustomer = rs.getInt("idCustomer");
             }
+            berhasil++;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (customers);
-    }
-
-    public static Customer getCustomer(String username) {
-        conn.connect();
-        String query = "SELECT * FROM customer WHERE userName='" + username + "'";
-        Customer customer = new Customer();
+        
+        String query3 = "INSERT INTO users (idJenisUser,userName, password,statusUser) VALUES (?,?,?,?)";
         try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                customer.setIdCustomer(rs.getInt("idCustomer"));
-                customer.setFirstname(rs.getString("firstName"));
-                customer.setLastname(rs.getString("lastName"));
-                customer.setUsername(rs.getString("userName"));
-                customer.setPassword(rs.getString("password"));
-                customer.setEmail(rs.getString("email"));
-                customer.setTelp(rs.getString("telepon"));
-                customer.setSaldoWallet(rs.getDouble("saldoWallet"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (customer);
-    }
-
-    public static ArrayList<ATMCard> getAllATM() {
-        ArrayList<ATMCard> atmCards = new ArrayList<>();
-        conn.connect();
-        String query = "SELECT * FROM atm";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                ATMCard atmCard = new ATMCard();
-                atmCard.setCardNumber(rs.getString("cardNumber"));
-                atmCard.setSaldo(rs.getDouble("saldo"));
-                atmCard.setPin(rs.getInt("pin"));
-                atmCards.add(atmCard);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (atmCards);
-    }
-
-    public boolean cekCardNumber(String cardNumber, String pin) {
-        conn.connect();
-        ArrayList<ATMCard> atmCards = getAllATM();
-        for (int i = 0; i < atmCards.size(); i++) {
-            if (atmCards.get(i).getCardNumber().equals(cardNumber)
-                    && atmCards.get(i).getPin() == Integer.parseInt(pin)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void setSaldoAtm(double saldo, String cardNumber) {
-        double saldoAwal = 0;
-        ArrayList<ATMCard> atmCards = getAllATM();
-        for (int i = 0; i < atmCards.size(); i++) {
-            if (atmCards.get(i).getCardNumber().equals(cardNumber)) {
-                saldoAwal = atmCards.get(i).getSaldo();
-                break;
-            }
-        }
-        conn.connect();
-        String query = "UPDATE atm SET saldo=? WHERE cardNumber=?";
-        try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setDouble(1, saldoAwal - saldo);
-            stmt.setString(2, cardNumber);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean topUp(double saldo, String username, double saldoAwal, String cardNumber) {
-        conn.connect();
-        String query = "UPDATE customer SET saldoWallet=? WHERE userName=?";
-        try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setDouble(1, saldoAwal + saldo);
+            PreparedStatement stmt = conn.con.prepareStatement(query3);
+            stmt.setInt(1, idLastCustomer);
             stmt.setString(2, username);
+            stmt.setString(3, password);
+            stmt.setString(4, "CUSTOMER");
             stmt.executeUpdate();
-            getCustomer(username);
-            setSaldoAtm(saldo, cardNumber);
-            return true;
+            berhasil++;
         } catch (SQLException e) {
             e.printStackTrace();
-            return (false);
         }
-    }
-
-    public boolean changePassword(String oldPass, String newPass, Customer customer) {
-        if (oldPass.equals(customer.getPassword())) {
-            conn.connect();
-            String query = "UPDATE customer SET password=? WHERE userName=?";
-            try {
-                PreparedStatement stmt = conn.con.prepareStatement(query);
-                stmt.setString(1, newPass);
-                stmt.setString(2, customer.getUsername());
-                stmt.executeUpdate();
-                return true;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return (false);
-            }
-        } else {
+        if(berhasil==3){
+            return true;
+        }else{
             return false;
         }
     }
 
-    public boolean updateProfile(String username, String firstname, String lastname, String email, String phone,
-            Customer customer) {
+    public String[] login(String username, String password) {
         conn.connect();
-        boolean cek = cekUsername(username);
-        if (cek) {
-            String query = "UPDATE customer SET userName=?, firstName=?, lastName=?, email=?, telepon=? WHERE userName=?";
-            try {
-                PreparedStatement stmt = conn.con.prepareStatement(query);
-                stmt.setString(1, username);
-                stmt.setString(2, firstname);
-                stmt.setString(3, lastname);
-                stmt.setString(4, email);
-                stmt.setString(5, phone);
-                stmt.setString(6, customer.getUsername());
-                stmt.executeUpdate();
-                return true;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return (false);
-            }
-        } else {
-            return false;
-        }
-    }
-
-    public boolean cekMembership(String username) {
-        conn.connect();
-        String query = "SELECT * FROM customer WHERE userName='" + username + "'";
+        int urutanUser = 0;
+        String jenisUser = "";
+        String[] returnValue = new String[2];
+        String query = "SELECT * FROM users WHERE userName='" + username + "'&&password='" + password + "'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                if (rs.getString("statusMember").equals("MEMBER")) {
-                    return true;
-                }
+               urutanUser = rs.getInt("idJenisUser");
+               jenisUser = rs.getString("statusUser");
             }
-            return false;
-
+            jenisUser = jenisUser.toLowerCase();
+            String stringUrutan = String.valueOf(urutanUser);
+            returnValue[0] = jenisUser;
+            returnValue[1] = stringUrutan;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return returnValue;
     }
-
-    public boolean joinMembership(Customer customer, double price) {
-        conn.connect();
-        String query = "UPDATE customer SET statusMember=?, saldoWallet=? WHERE userName=?";
+    
+    public static String[] getAllUsername() {
+        int count = 0;
+        String query = "SELECT * FROM users";
         try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setString(1, "MEMBER");
-            stmt.setDouble(2, customer.getSaldoWallet() - price);
-            stmt.setString(3, customer.getUsername());
-            stmt.executeUpdate();
-            return true;
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                count++;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return (false);
         }
+        
+        String[] listUsername = new String[count];
+        conn.connect();
+        String query2 = "SELECT userName FROM users";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query2);
+            int i = 0;
+            while (rs.next()) {
+                listUsername[i] = rs.getString("userName");
+                i++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listUsername;
     }
 }

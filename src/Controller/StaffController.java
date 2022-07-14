@@ -200,8 +200,6 @@ public class StaffController {
             return false;
         }
     }
-
-
     public boolean cekVoucher(String voucher){
         ArrayList<Voucher> vouchers = getAllVoucher();
         for (Voucher v : vouchers) {
