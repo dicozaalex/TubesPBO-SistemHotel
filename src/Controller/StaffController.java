@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.CabangHotel;
 import Model.Extra;
 import Model.Voucher;
 
@@ -8,9 +9,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StaffController {
     static ConnectDatabase conn = SingletonDatabase.getConnectObject();
+
+    public static ArrayList<Voucher> getAllVoucher() {
+        ArrayList<Voucher> vouchers = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM voucher";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                Voucher voucher = new Voucher();
+                voucher.setIdVoucher(resultSet.getInt("idVoucher"));
+                voucher.setNamaVoucher(resultSet.getString("namaVoucher"));
+                voucher.setPersenVoucher(resultSet.getDouble("persenVoucher"));
+                vouchers.add(voucher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+        }
+        return vouchers;
+    }
+
 
     public static Voucher getVoucher(String namaVoucher) {
         Voucher voucher = new Voucher();
@@ -106,6 +130,30 @@ public class StaffController {
         return extras;
     }
 
+    public static List<List<String>> getAllExtras() {
+        List<List<String>> hasil = new ArrayList<>();
+        List<String> extras = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM extra";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                extras.clear();
+                extras.add(String.valueOf(resultSet.getInt("idExtra")));
+                extras.add(resultSet.getString("namaExtra"));
+                extras.add(String.valueOf(resultSet.getInt("idCabang")));
+                extras.add(String.valueOf(resultSet.getDouble("hargaExtra")));
+                hasil.add(extras);
+            }
+            conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+        }
+        return hasil;
+    }
+
     public static boolean addExtra(Extra extra) {
         conn.connect();
         String query = "INSERT INTO extra (idCabang, namaExtra, hargaExtra) VALUES (?,?,?,?)";
@@ -153,6 +201,51 @@ public class StaffController {
             conn.disconnect();
             return false;
         }
+    }
+
+    public static List<List<String>> getAllVouchers() {
+        List<List<String>> hasil = new ArrayList<>();
+        List<String> voucher = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM voucher";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                voucher.clear();
+                voucher.add(String.valueOf(resultSet.getInt("idVoucher")));
+                voucher.add(resultSet.getString("namaVoucher"));
+                voucher.add(String.valueOf(resultSet.getDouble("persenVoucher")));
+                hasil.add(voucher);
+            }
+            conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+        }
+        return hasil;
+    }
+
+    public static String[] getIdCabang(ArrayList<CabangHotel> cabangHotels) {
+        ArrayList<Integer> ids = new ArrayList<>();
+        for (int i = 0; i < cabangHotels.size(); i++) {
+            ids.add(cabangHotels.get(i).getIdCabang());
+        }
+        String[] allIdCabang = new String[ids.size()];
+        for (int i = 0; i < allIdCabang.length; i++) {
+            allIdCabang[i] = String.valueOf(ids.get(i));
+        }
+        return allIdCabang;
+    }
+
+    public boolean cekVoucher(String voucher) {
+        ArrayList<Voucher> vouchers = getAllVoucher();
+        for (Voucher v : vouchers) {
+            if (v.getNamaVoucher().equals(voucher)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
