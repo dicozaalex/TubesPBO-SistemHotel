@@ -4,6 +4,7 @@ import Controller.CustomerController;
 import javax.swing.*;
 import java.awt.event.*;
 import Model.Customer;
+import java.awt.Font;
 
 public class UpdateProfile {
     public UpdateProfile(Customer customer, int selectedCabangHotel) {
@@ -12,9 +13,12 @@ public class UpdateProfile {
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
         JLabel menuLabel = new JLabel("Please Select Your Menu");
 
+        
+        welcomeLabel.setFont(new Font("Arial", Font.ITALIC, 20));
         welcomeLabel.setBounds(100, 20, 300, 20);
         f.add(welcomeLabel);
 
+        menuLabel.setFont(new Font("Arial", Font.ITALIC, 15));
         menuLabel.setBounds(20, 50, 300, 20);
         f.add(menuLabel);
 
@@ -42,7 +46,7 @@ public class UpdateProfile {
         inputUserName.setBounds(150, 100, 200, 25);
         inputFirstname.setBounds(150, 120, 200, 25);
         inputLastname.setBounds(150, 140, 200, 25);
-        changePassButton.setBounds(150, 160, 200, 25);
+        changePassButton.setBounds(150, 160, 200, 23);
         inputEmail.setBounds(150, 180, 200, 25);
         inputPhone.setBounds(150, 200, 200, 25);
 
@@ -67,7 +71,7 @@ public class UpdateProfile {
         });
 
         JButton updateButton = new JButton("Update");
-        updateButton.setBounds(35, 220, 200, 25);
+        updateButton.setBounds(35, 240, 200, 25);
         f.add(updateButton);
 
         updateButton.addActionListener(new ActionListener() {
@@ -90,7 +94,7 @@ public class UpdateProfile {
         });
 
         JButton backButton = new JButton("Back");
-        backButton.setBounds(35, 250, 200, 25);
+        backButton.setBounds(35, 270, 200, 25);
         f.add(backButton);
 
         backButton.addActionListener(new ActionListener() {

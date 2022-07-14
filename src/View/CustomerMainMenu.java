@@ -17,7 +17,7 @@ public class CustomerMainMenu {
         f.add(welcomeLabel);
 
         menuLabel.setFont(new Font("Arial", Font.ITALIC, 15));
-        menuLabel.setBounds(20, 90, 300, 20);
+        menuLabel.setBounds(20, 50, 300, 20);
         f.add(menuLabel);
 
         JButton bookButton = new JButton("1. Book");

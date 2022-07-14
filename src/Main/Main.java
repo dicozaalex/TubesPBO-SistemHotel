@@ -5,7 +5,8 @@
  */
 package Main;
 import Controller.ConnectDatabase;
-import InitDatabase.*;
+import InitDatabase.CreateTable;
+import InitDatabase.DummyDatabase;
 import View.Login;
 /**
  *
