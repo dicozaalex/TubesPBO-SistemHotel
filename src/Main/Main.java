@@ -6,7 +6,8 @@
 package Main;
 import Controller.ConnectDatabase;
 import InitDatabase.CreateTable;
-import View.Login;
+import InitDatabase.DummyDatabase;
+import View.*;
 /**
  *
  * @author juand
@@ -14,6 +15,7 @@ import View.Login;
 public class Main {
     public static void main(String[] args) {
         // new CreateTable();
+        // new DummyDatabase();
         new Login();
     }
 }

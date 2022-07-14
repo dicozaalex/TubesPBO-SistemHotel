@@ -60,7 +60,7 @@ public class Register {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LoginController c = new LoginController();
-
+                System.out.println("controller");
                 String username = inputUserName.getText();
                 boolean cekUsername = c.cekUsername(username);
                 String firstname = inputFirstname.getText();
@@ -76,7 +76,9 @@ public class Register {
                     } else if (!password.equals(confirmPass)) {
                         JOptionPane.showMessageDialog(null, "Password does not match");
                     } else {
-                        c.register(username, firstname, lastname, password, email, phone);
+                       
+                        boolean a = c.register(username, firstname, lastname, password, email, phone);
+                        System.out.println(a);
                         f.dispose();
                         new Login();
                     }
