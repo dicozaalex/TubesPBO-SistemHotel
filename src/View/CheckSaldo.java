@@ -1,6 +1,6 @@
 package View;
 
-import Controller.LoginController;
+import Controller.CustomerController;
 import javax.swing.*;
 
 import java.awt.event.*;
@@ -95,7 +95,7 @@ public class CheckSaldo {
                 String card = cardField.getText();
                 String pin = pinField.getText();
                 double saldo = Double.parseDouble(saldoField.getText());
-                LoginController loginController = new LoginController();
+                CustomerController loginController = new CustomerController();
                 boolean cekCardNumber = loginController.cekCardNumber(card, pin);
                 if (cekCardNumber) {
                     boolean cekTopUp = loginController.topUp(saldo, customer.getUsername(),

@@ -1,6 +1,6 @@
 package View;
 
-import Controller.LoginController;
+import Controller.CustomerController;
 import javax.swing.*;
 import java.awt.event.*;
 import Model.Customer;
@@ -73,7 +73,7 @@ public class UpdateProfile {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginController loginController = new LoginController();
+                CustomerController loginController = new CustomerController();
                 String username = inputUserName.getText();
                 String firstname = inputFirstname.getText();
                 String lastname = inputLastname.getText();
@@ -135,7 +135,7 @@ public class UpdateProfile {
                 String newPassword = newPass.getText();
                 String confirmPassword = confirmPass.getText();
                 String oldPassword = oldPass.getText();
-                LoginController loginController = new LoginController();
+                CustomerController loginController = new CustomerController();
                 if (newPassword.equals(confirmPassword)) {
                     boolean cekPass = loginController.changePassword(oldPassword, newPassword, customer);
                     if (cekPass) {

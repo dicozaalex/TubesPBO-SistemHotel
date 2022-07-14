@@ -10,7 +10,7 @@ import Model.*;
 public class JoinMember {
     public JoinMember(Customer customer, int selectedCabangHotel) {
         StaffController staffController = new StaffController();
-        LoginController loginController = new LoginController();
+        CustomerController loginController = new CustomerController();
         JFrame f = new JFrame("Join Member");
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
         JLabel menuLabel = new JLabel("Please Select Your Menu");

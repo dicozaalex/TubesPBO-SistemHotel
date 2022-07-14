@@ -6,17 +6,22 @@ import javax.swing.*;
 import Controller.*;
 import Model.*;
 
-public class Login {
+public class Login extends JFrame implements ActionListener {
+
+    JFrame f = new JFrame("Login To Your Account");
+    JLabel username, password;
+    JTextField inputUserName;
+    JPasswordField inputPassword;
+    JButton loginButton, registerButton;
+
     public Login() {
-        JFrame f = new JFrame("Login To Your Account");
-        JLabel username, password;
-        JTextField inputUserName;
-        JPasswordField inputPassword;
 
         username = new JLabel("Username");
         password = new JLabel("Password");
         inputUserName = new JTextField();
         inputPassword = new JPasswordField();
+        loginButton = new JButton("LOGIN");
+        registerButton = new JButton("REGISTER");
 
         username.setFont(new Font("Arial", Font.ITALIC, 15));
         password.setFont(new Font("Arial", Font.ITALIC, 15));
@@ -26,40 +31,16 @@ public class Login {
         password.setBounds(35, 80, 300, 20);
         inputPassword.setBounds(35, 100, 300, 30);
 
-        JButton loginButton = new JButton("LOGIN");
         loginButton.setBounds(35, 150, 300, 40);
 
-        JButton registerButton = new JButton("REGISTER");
         registerButton.setBounds(35, 200, 300, 40);
 
         registerButton.setFont(new Font("Arial", Font.ITALIC, 12));
         loginButton.setFont(new Font("Arial", Font.ITALIC, 12));
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LoginController c = new LoginController();
-                String cekUsername = inputUserName.getText();
-                String cekPassword = inputPassword.getText();
-                boolean cekLogin = c.login(cekUsername, cekPassword);
-                if (cekLogin) {
-                    Customer customer = c.getCustomer(cekUsername);
-                    JOptionPane.showMessageDialog(null, "Login Success");
-                    f.dispose();
-                    new CustomerBranchMenu(customer);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Login Failed");
-                }
-            }
-        });
+        loginButton.addActionListener(this);
 
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                f.dispose();
-                new Register();
-            }
-        });
+        registerButton.addActionListener(this);
 
         f.add(username);
         f.add(inputUserName);
@@ -68,10 +49,47 @@ public class Login {
         f.add(loginButton);
         f.add(registerButton);
 
-        f.setSize(400, 350);
+        f.setSize(400, 400);
         f.setLayout(null);
         f.setVisible(true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == loginButton) {
+            LoginController logc = new LoginController();
+            CustomerController cusc = new CustomerController();
+            String cekUsername = inputUserName.getText();
+            String cekPassword = inputPassword.getText();
+            String[] valueReturn = logc.login(cekUsername, cekPassword);
+            boolean berhasil = false;
+            if (!valueReturn[0].equals("") && !valueReturn[1].equals("")) {
+                berhasil = true;
+            }
+            if (berhasil) {
+                JOptionPane.showMessageDialog(null, "Login Success");
+                f.dispose();
+                if (valueReturn[0].equals("customer")) {
+                    Customer customer = cusc.getCustomer(cekUsername);
+                    new CustomerBranchMenu(customer);
+                }else if(valueReturn[0].equals("staff")){
+//                    new StaffMainMenu();
+                }else if(valueReturn[0].equals("manager")){
+//                    new ManagerMainMenu();
+                }else if(valueReturn[0].equals("boss")){
+                    new BossMainMenu();
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Login Failed");
+            }
+        }
+        if (e.getSource() == registerButton) {
+
+            f.dispose();
+            new Register();
+        }
+
+    }
 }
