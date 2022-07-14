@@ -45,7 +45,7 @@ public class CustomerBranchMenu {
 
         bookButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int selectedCabangHotel = inputCabangHotel.getSelectedIndex();
+                int selectedCabangHotel = inputCabangHotel.getSelectedIndex() + 1;
                 new CustomerMainMenu(customer, selectedCabangHotel);
                 f.dispose();
             }
