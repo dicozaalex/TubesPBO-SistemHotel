@@ -129,7 +129,6 @@ public class StaffMainMenu {
                 throw new RuntimeException(ex);
             }
             frameAddExtra.dispose();
-            new StaffMainMenu();
         });
         GroupLayout layout = new GroupLayout(panel);
         panel.setLayout(layout);
@@ -178,9 +177,9 @@ public class StaffMainMenu {
         if (!dataTabelVoucher.isEmpty()) {
             String[] columnNames = {"ID Voucher", "Nama Voucher", "Persen Voucher"};
             String[][] data = new String[dataTabelVoucher.size()][dataTabelVoucher.get(0).size()];
-            for (int i = 0; i < dataTabel.size(); i++) {
-                for (int j = 0; j < dataTabel.get(i).size(); j++) {
-                    data[i][j] = dataTabel.get(i).get(j);
+            for (int i = 0; i < dataTabelVoucher.size(); i++) {
+                for (int j = 0; j < dataTabelVoucher.get(i).size(); j++) {
+                    data[i][j] = dataTabelVoucher.get(i).get(j);
                 }
             }
             JTable tabelVouchers = new JTable(data, columnNames);
@@ -252,7 +251,10 @@ public class StaffMainMenu {
         panelDeleteVoucher.add(submitDeleteVoucher);
         frameDeleteVoucher.add(panelDeleteVoucher);
 
-        manageExtras.addActionListener(e -> frame3.setVisible(true));
+        manageExtras.addActionListener(e -> {
+            frame3.setVisible(true);
+            frame.dispose();
+        });
         manageVoucher.addActionListener(e -> {
             frame2.setVisible(true);
             frame.dispose();
