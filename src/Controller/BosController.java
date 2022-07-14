@@ -74,7 +74,7 @@ public class BosController {
         }
 
         int idJenisUser = 0;
-        String queryGetIdJenisUser = "SELECT idJenisUser FROM manager WHERE userName=" + username;
+        String queryGetIdJenisUser = "SELECT idManager FROM manager WHERE userName=" + username;
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(queryGetIdJenisUser);
@@ -87,7 +87,7 @@ public class BosController {
                 + "VALUES('" + idJenisUser + "'+" + username + "','" + password + "','MANAGER')";
         try {
             Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(queryUser);
+            stmt.executeQuery(queryUser);
         } catch (SQLException e) {
             e.printStackTrace();
         }
