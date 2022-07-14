@@ -29,12 +29,11 @@ public class JoinMember {
             JLabel benefitLabel = new JLabel("Benefit Membership");
             benefitLabel.setBounds(20, 80, 300, 20);
             f.add(benefitLabel);
-
             ArrayList<Extra> benefit = staffController.getExtras(selectedCabangHotel);
             double price = 0;
             for (int i = 0; i < benefit.size(); i++) {
                 JLabel benefitName = new JLabel(benefit.get(i).getNamaExtra());
-                benefitName.setBounds(20, 120 + i * 15, 300, 20);
+                benefitName.setBounds(20, 100 + i * 15, 300, 20);
                 f.add(benefitName);
                 price += benefit.get(i).getHargaExtra();
             }
@@ -74,14 +73,14 @@ public class JoinMember {
             benefitLabel.setFont(new Font("Arial", Font.ITALIC, 12));
 
             JLabel listBenefitLabel = new JLabel("List Benefit");
-            listBenefitLabel.setBounds(20, 120, 300, 20);
+            listBenefitLabel.setBounds(20, 80, 300, 20);
             f.add(listBenefitLabel);
             listBenefitLabel.setFont(new Font("Arial", Font.BOLD, 14));
             
             ArrayList<Extra> benefit = staffController.getExtras(selectedCabangHotel);
             for (int i = 0; i < benefit.size(); i++) {
                 JLabel benefitName = new JLabel(benefit.get(i).getNamaExtra());
-                benefitName.setBounds(20, 120 + i * 15, 300, 20);
+                benefitName.setBounds(20, 100 + i * 15, 300, 20);
                 f.add(benefitName);
             }
 

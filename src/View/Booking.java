@@ -123,13 +123,14 @@ public class Booking {
                 String tanggal = tanggalCheckIn.getModel().getValue().toString();
                 int lamaInap = Integer.parseInt(inputLamaInap.getText());
                 boolean cekRoom = reservationController.cekRoom(selectedCabangHotel, banyakOrangInt, jenisRoom);
+                int takeRoom = reservationController.takeRoom(selectedCabangHotel, jenisRoom);
+                reservationController.setStatusOccupied(selectedCabangHotel, jenisRoom, takeRoom);
                 if (cekRoom) {
-                    addReservation(customer, selectedCabangHotel, banyakOrangInt, jenisRoom, tanggal, lamaInap);
+                    addReservation(customer, selectedCabangHotel, banyakOrangInt, jenisRoom, tanggal, lamaInap, takeRoom);
                     f.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Room Not Available");
                 }
-                f.dispose();
             }
         });
 
@@ -141,7 +142,7 @@ public class Booking {
     }
 
     public void addReservation(Customer customer, int selectedCabangHotel, int banyakOrang, String jenisRoom,
-            String tanggal, int lamaInap) {
+            String tanggal, int lamaInap, int takeRoom) {
         
         JFrame f = new JFrame("Confirmation");
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
@@ -154,6 +155,7 @@ public class Booking {
         JLabel banyakOrangLabel = new JLabel("Banyak Orang\n " + banyakOrang);
         JLabel tanggalLabel = new JLabel("Tanggal\n " + tanggal);
         JLabel lamaInapLabel = new JLabel("Lama Inap\n " + lamaInap);
+        JLabel noRoomLabel = new JLabel("No Room\n " + takeRoom);
 
         jenisRoomLabel.setBounds(20, 80, 300, 20);
         f.add(jenisRoomLabel);
@@ -163,8 +165,11 @@ public class Booking {
         tanggalLabel.setBounds(20, 140, 300, 20);
         f.add(tanggalLabel);
 
-        lamaInapLabel.setBounds(20, 1170, 300, 20);
+        lamaInapLabel.setBounds(20, 170, 300, 20);
         f.add(lamaInapLabel);
+
+        noRoomLabel.setBounds(20, 200, 300, 20);
+        f.add(noRoomLabel);
 
         JLabel addExtraLabel = new JLabel("Add Extra");
         addExtraLabel.setBounds(400, 80, 300, 20);
@@ -203,12 +208,12 @@ public class Booking {
                 boolean cekVoucher = staffController.cekVoucher(voucher);
                 if (cekVoucher) {
                     JOptionPane.showMessageDialog(null, "Voucher Valid");
-                    double totalHargaRoom = reservationController.cekHarga(selectedCabangHotel, member, jenisRoom, addExtraCheckBox, voucher, customer, extras);
-                    menuConfirmation(customer, totalHargaRoom);
-                    f.dispose();
                 }else{
                     JOptionPane.showMessageDialog(null, "Voucher Invalid");
                 }
+                double totalHargaRoom = reservationController.cekHarga(selectedCabangHotel, member, jenisRoom, addExtraCheckBox, voucher, customer, extras);
+                menuConfirmation(customer, totalHargaRoom);
+                f.dispose();
             }
         });
 

@@ -77,7 +77,43 @@ public class ReservationController {
         }
         return false;
     }
-    
+
+    public int takeRoom(int selectedCabangHotel, String jenisRoom){
+        ArrayList<Room> rooms = getAllRoom(selectedCabangHotel);
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.get(i).getIdJenisRoom() == getIdJenisRoom(selectedCabangHotel, jenisRoom)) {
+                if (rooms.get(i).getStatusOccupied() == EnumRoom.NOT_OCCUPIED) {
+                    return rooms.get(i).getNomorRoom();
+                }
+            }
+        }
+        return 0;
+    }
+
+    public void setStatusOccupied(int selectedCabangHotel, String jenisRoom, int nomorRoom) {
+        conn.connect();
+        String query = "UPDATE room SET status='" + EnumRoom.OCCUPIED + "' WHERE idCabang=" + selectedCabangHotel + " AND idJenisRoom=" + getIdJenisRoom(selectedCabangHotel, jenisRoom) + " AND nomorRoom=" + nomorRoom;
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+        }
+    }
+
+
+    public int getIdJenisRoom(int selectedCabangHotel, String jenisRoom) {
+        ArrayList<JenisRoom> jenisRooms = getAllJenisRoom(selectedCabangHotel);
+        for (int i = 0; i < jenisRooms.size(); i++) {
+            if (jenisRooms.get(i).getJenisRoom().equals(jenisRoom)) {
+                return jenisRooms.get(i).getIdJenisRoom();
+            }
+        }
+        return 0;
+    }
+
     
 
     public double cekHarga(int selectedCabangHotel, boolean member, String jenisRoom, JCheckBox addExtraCheckBox[],

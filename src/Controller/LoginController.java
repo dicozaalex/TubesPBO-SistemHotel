@@ -165,7 +165,7 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-   
+
     public boolean topUp(double saldo, String username, double saldoAwal, String cardNumber) {
         conn.connect();
         String query = "UPDATE customer SET saldoWallet=? WHERE userName=?";
@@ -247,9 +247,6 @@ public class LoginController {
     }
 
     public boolean joinMembership(Customer customer, double price) {
-        System.out.println(customer.getSaldoWallet());
-        System.out.println(price);
-        System.out.println(customer.getSaldoWallet() - price);
         conn.connect();
         String query = "UPDATE customer SET statusMember=?, saldoWallet=? WHERE userName=?";
         try {
