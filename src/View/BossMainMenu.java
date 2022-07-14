@@ -12,7 +12,7 @@ import Controller.*;
 
 public class BossMainMenu extends JFrame implements ActionListener {
 
-    JFrame f = new JFrame();
+    JFrame f = new JFrame("Menu Boss");
     BosController bosc = new BosController();
     
     JButton buttonPendapatan, buttonAddCabang,buttonExit;
