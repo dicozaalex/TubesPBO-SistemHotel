@@ -165,4 +165,23 @@ public class ReservationController {
             return false;
         }
     }
+
+    public void setTransaksi(Customer customer, String tanggalCheckIn, String tanggalCheckOut, int banyakOrang, int idRoom, double totalHarga) {
+        conn.connect();
+        String query = "INSERT INTO transaksi (idCustomer, tanggalCheckIn, tanggalCheckOut, banyakOrang, idRoom, totalHarga) VALUES (?,?,?,?,?,?)";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, customer.getIdCustomer());
+            stmt.setString(2, tanggalCheckIn);
+            stmt.setString(3, tanggalCheckOut);
+            stmt.setInt(4, banyakOrang);
+            stmt.setInt(5, idRoom);
+            stmt.setDouble(6, totalHarga);
+            stmt.executeUpdate();
+            conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+        }
+    }
 }
