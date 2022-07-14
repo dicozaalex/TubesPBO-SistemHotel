@@ -108,10 +108,8 @@ public class ReservationController {
         try {
             Statement stmt = conn.con.createStatement();
             stmt.executeUpdate(query);
-            conn.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
-            conn.disconnect();
         }
     }
 
