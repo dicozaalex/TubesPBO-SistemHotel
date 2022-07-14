@@ -154,5 +154,27 @@ public class StaffController {
             return false;
         }
     }
+
+    public static ArrayList<Voucher> getAllVoucher() {
+        ArrayList<Voucher> vouchers = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM voucher";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                Voucher voucher = new Voucher();
+                voucher.setIdVoucher(resultSet.getInt("idVoucher"));
+                voucher.setNamaVoucher(resultSet.getString("namaVoucher"));
+                voucher.setPersenVoucher(resultSet.getDouble("persenVoucher"));
+                vouchers.add(voucher);
+            }
+            conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+        }
+        return vouchers;
+    }
 }
 
