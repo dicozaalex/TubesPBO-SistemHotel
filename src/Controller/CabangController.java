@@ -6,33 +6,54 @@
 package Controller;
 
 /**
- *
  * @author calvi
  */
+
+import Model.CabangHotel;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class CabangController {
-    
-    static ConnectDatabase conn=new ConnectDatabase();
 
-    
-    public int countCabang(){
+    static ConnectDatabase conn = new ConnectDatabase();
+
+    public static ArrayList<CabangHotel> getAllCabangs() {
+        ArrayList<CabangHotel> cabangs = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM cabang";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                CabangHotel cabangHotel = new CabangHotel();
+                cabangHotel.setIdCabang(rs.getInt("idCabang"));
+                cabangHotel.setLokasiCabang(rs.getString("lokasiCabang"));
+                cabangHotel.setAlamatCabang(rs.getString("alamatCabang"));
+                cabangs.add(cabangHotel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (cabangs);
+    }
+
+    public int countCabang() {
         int count = 0;
         String query = "SELECT idCabang FROM cabang";
         conn.connect();
-        try{
+        try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            while(rs.next()){
+            while (rs.next()) {
                 count++;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         conn.disconnect();
         return count;
     }
-
 }

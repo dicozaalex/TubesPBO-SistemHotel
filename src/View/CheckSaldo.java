@@ -1,12 +1,11 @@
 package View;
 
 import Controller.LoginController;
-import javax.swing.*;
-
-import com.mysql.cj.xdevapi.SelectStatement;
-
-import java.awt.event.*;
 import Model.Customer;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CheckSaldo {
     public CheckSaldo(Customer customer, int selectedCabangHotel) {
