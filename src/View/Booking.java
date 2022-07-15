@@ -90,6 +90,7 @@ public class Booking {
         p.put("text.month", "Month");
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model1, p);
+        
         JDatePickerImpl tanggalCheckIn = new JDatePickerImpl(datePanel, new DateLabelFormatter());
         tanggalCheckIn.setBounds(20, 200, 300, 30);
         f.add(tanggalCheckIn);
@@ -129,10 +130,11 @@ public class Booking {
                 int lamaInap = Integer.parseInt(inputLamaInap.getText());
                 boolean cekRoom = reservationController.cekRoom(selectedCabangHotel, banyakOrangInt, jenisRoom);
                 int takeRoom = reservationController.takeRoom(selectedCabangHotel, jenisRoom);
+                int idRoom = reservationController.takeIdRoom(selectedCabangHotel, jenisRoom);
                 reservationController.setStatusOccupied(selectedCabangHotel, jenisRoom, takeRoom);
                 if (cekRoom) {
                     addReservation(customer, selectedCabangHotel, banyakOrangInt, jenisRoom, tanggal, lamaInap,
-                            takeRoom);
+                            takeRoom, idRoom);
                     f.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Room Not Available");
@@ -148,7 +150,7 @@ public class Booking {
     }
 
     public void addReservation(Customer customer, int selectedCabangHotel, int banyakOrang, String jenisRoom,
-            String tanggal, int lamaInap, int takeRoom) {
+            String tanggal, int lamaInap, int takeRoom, int idRoom) {
 
         JFrame f = new JFrame("Confirmation");
         JLabel welcomeLabel = new JLabel("Welcome to Hotel");
@@ -218,7 +220,7 @@ public class Booking {
                 }
                 double totalHargaRoom = reservationController.cekHarga(selectedCabangHotel, member, jenisRoom,
                         addExtraCheckBox, voucher, customer, extras, lamaInap);
-                menuConfirmation(customer, totalHargaRoom, selectedCabangHotel);
+                menuConfirmation(customer, totalHargaRoom, selectedCabangHotel, tanggal, lamaInap, banyakOrang, idRoom);
                 f.dispose();
             }
         });
@@ -229,12 +231,12 @@ public class Booking {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void menuConfirmation(Customer customer, double totalHargaRoom, int selectedCabangHotel) {
+    public void menuConfirmation(Customer customer, double totalHargaRoom, int selectedCabangHotel, String tanggalCheckIn, int lamaInap, int banyakOrang, int idRoom) {
         JFrame f = new JFrame("Confirmation");
         JLabel totalHargaLabel = new JLabel("Total Harga\n " + totalHargaRoom);
         totalHargaLabel.setBounds(20, 50, 300, 20);
         f.add(totalHargaLabel);
-
+        System.out.println(tanggalCheckIn);
         JButton confirmButton = new JButton("Confirm");
         confirmButton.setBounds(20, 80, 300, 30);
         f.add(confirmButton);
@@ -244,7 +246,9 @@ public class Booking {
                 boolean cekSaldo = reservationController.cekSaldoBayar(customer, totalHargaRoom);
                 if (cekSaldo) {
                     JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
-                    // reservationController.setTransaksi(customer, tanggalCheckIn, tanggalCheckOut, banyakOrang, idRoom, totalHarga);
+//                    String tanggalCheckOut = ;
+                    String stringLamaInap = String.valueOf(lamaInap);
+                    reservationController.setTransaksi(customer, tanggalCheckIn, stringLamaInap, banyakOrang, idRoom, totalHargaRoom);
                 } else {
                     JOptionPane.showMessageDialog(null, "Pembayaran Gagal");
                 }

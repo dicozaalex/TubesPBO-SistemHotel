@@ -21,6 +21,7 @@ public class AddManagerBaru extends JFrame implements ActionListener {
     BosController bosc = new BosController();
     Manager manager = new Manager();
 
+    Boss bos = new Boss();
     public AddManagerBaru(String[] valueSebelum) {
         valuePrev = valueSebelum;
 
@@ -116,7 +117,7 @@ public class AddManagerBaru extends JFrame implements ActionListener {
                 manager.setEmail(email.getText());
                 bosc.addCabang(valuePrev[0], valuePrev[1], manager);
                 f.dispose();
-                new BossMainMenu();
+                new BossMainMenu(bos.getUsername());
             } else {
                 errormessage.setVisible(true);
             }

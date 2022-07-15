@@ -15,7 +15,7 @@ import View.*;
 public class Main {
     public static void main(String[] args) {
         // new CreateTable();
-        // new DummyDatabase();
+//        new DummyDatabase();
         new Login();
     }
 }

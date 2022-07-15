@@ -48,6 +48,7 @@ public class CustomerMainMenu {
         f.add(logoutButton);
 
         bookButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new Booking(customer, selectedCabangHotel);
                 f.dispose();
@@ -55,6 +56,7 @@ public class CustomerMainMenu {
         });
 
         memberButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new JoinMember(customer, selectedCabangHotel);
                 f.dispose();
@@ -62,6 +64,7 @@ public class CustomerMainMenu {
         });
 
         saldoButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new CheckSaldo(customer, selectedCabangHotel);
                 f.dispose();
@@ -69,6 +72,7 @@ public class CustomerMainMenu {
         });
 
         updateButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new UpdateProfile(customer, selectedCabangHotel);
                 f.dispose();
@@ -76,6 +80,7 @@ public class CustomerMainMenu {
         });
 
         backButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new CustomerBranchMenu(customer);
                 f.dispose();
@@ -83,6 +88,7 @@ public class CustomerMainMenu {
         });
 
         logoutButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new Login();
                 f.dispose();
