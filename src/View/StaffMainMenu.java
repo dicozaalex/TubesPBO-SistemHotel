@@ -85,22 +85,7 @@ public class StaffMainMenu {
         JFrame frameShowExtras = new JFrame("Show Extras");
         frameShowExtras.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         JPanel panelShowExtras = new JPanel();
-        List<List<String>> dataTabel = StaffController.getAllExtras();
-        if (!dataTabel.isEmpty()) {
-            String[] columnNames = {"ID Extra", "ID Cabang", "Nama Extra", "Harga Extra"};
-            String[][] data = new String[dataTabel.size()][dataTabel.get(0).size()];
-            for (int i = 0; i < dataTabel.size(); i++) {
-                for (int j = 0; j < dataTabel.get(i).size(); j++) {
-                    data[i][j] = dataTabel.get(i).get(j);
-                }
-            }
-            JTable tabelExtras = new JTable(data, columnNames);
-            panelShowExtras.add(new JScrollPane(tabelExtras));
-            tabelExtras.setVisible(true);
-        } else {
-            JLabel label = new JLabel("Extras Masih Kosong!");
-            panelShowExtras.add(label);
-        }
+
         frameShowExtras.add(panelShowExtras);
         frameShowExtras.pack();
 
@@ -173,22 +158,7 @@ public class StaffMainMenu {
         JFrame frameShowVouchers = new JFrame("Show Vouchers");
         frameShowVouchers.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         JPanel panelShowVouchers = new JPanel();
-        List<List<String>> dataTabelVoucher = StaffController.getAllVouchers();
-        if (!dataTabelVoucher.isEmpty()) {
-            String[] columnNames = {"ID Voucher", "Nama Voucher", "Persen Voucher"};
-            String[][] data = new String[dataTabelVoucher.size()][dataTabelVoucher.get(0).size()];
-            for (int i = 0; i < dataTabelVoucher.size(); i++) {
-                for (int j = 0; j < dataTabelVoucher.get(i).size(); j++) {
-                    data[i][j] = dataTabelVoucher.get(i).get(j);
-                }
-            }
-            JTable tabelVouchers = new JTable(data, columnNames);
-            panelShowVouchers.add(new JScrollPane(tabelVouchers));
-            tabelVouchers.setVisible(true);
-        } else {
-            JLabel label = new JLabel("Tidak ada voucher!");
-            panelShowVouchers.add(label);
-        }
+
         frameShowVouchers.add(panelShowVouchers);
         frameShowVouchers.pack();
 
@@ -262,15 +232,57 @@ public class StaffMainMenu {
             frame.dispose();
         });
         addExtra.addActionListener(e -> frameAddExtra.setVisible(true));
-        showExtras.addActionListener(e -> frameShowExtras.setVisible(true));
+        showExtras.addActionListener(e -> {
+            List<List<String>> dataTabel = StaffController.getAllExtras();
+            if (!dataTabel.isEmpty()) {
+                String[] columnNames = {"ID Extra", "ID Cabang", "Nama Extra", "Harga Extra"};
+                String[][] data = new String[dataTabel.size()][dataTabel.get(0).size()];
+                for (int i = 0; i < dataTabel.size(); i++) {
+                    for (int j = 0; j < dataTabel.get(i).size(); j++) {
+                        data[i][j] = dataTabel.get(i).get(j);
+                    }
+                }
+                JTable tabelExtras = new JTable(data, columnNames);
+                panelShowExtras.add(new JScrollPane(tabelExtras));
+                tabelExtras.setVisible(true);
+            } else {
+                JLabel label = new JLabel("Extras Masih Kosong!");
+                panelShowExtras.add(label);
+            }
+            frameShowExtras.pack();
+            frameShowExtras.setVisible(true);
+        });
         deleteExtra.addActionListener(e -> frameDeleteExtras.setVisible(true));
 
-        showVouchers.addActionListener(e -> frameShowVouchers.setVisible(true));
+        showVouchers.addActionListener(e -> {
+            List<List<String>> dataTabelVoucher = StaffController.getAllVouchers();
+            if (!dataTabelVoucher.isEmpty()) {
+                String[] columnNames = {"ID Voucher", "Nama Voucher", "Persen Voucher"};
+                String[][] data = new String[dataTabelVoucher.size()][dataTabelVoucher.get(0).size()];
+                for (int i = 0; i < dataTabelVoucher.size(); i++) {
+                    for (int j = 0; j < dataTabelVoucher.get(i).size(); j++) {
+                        data[i][j] = dataTabelVoucher.get(i).get(j);
+                    }
+                }
+                JTable tabelVouchers = new JTable(data, columnNames);
+                panelShowVouchers.add(new JScrollPane(tabelVouchers));
+                tabelVouchers.setVisible(true);
+            } else {
+                JLabel label = new JLabel("Tidak ada voucher!");
+                panelShowVouchers.add(label);
+            }
+            frameShowVouchers.pack();
+            frameShowVouchers.setVisible(true);
+        });
         addVoucher.addActionListener(e -> frameAddVoucher.setVisible(true));
         deleteVoucher.addActionListener(e -> frameDeleteVoucher.setVisible(true));
 
         frame.setSize(400, 400);
         frame2.setSize(400, 400);
         frame3.setSize(400, 400);
+    }
+
+    public static void main(String[] args) {
+        new StaffMainMenu();
     }
 }
