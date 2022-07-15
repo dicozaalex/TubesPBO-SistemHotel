@@ -74,15 +74,15 @@ public class Login extends JFrame implements ActionListener {
                 if (valueReturn.equals("customer")) {
                     Customer customer = cusc.getCustomer(cekUsername);
                     new CustomerBranchMenu(customer);
-                }else if(valueReturn.equals("staff")){
-                   new StaffMainMenu();
-                }else if(valueReturn.equals("manager")){
-//                    new ManagerMainMenu();
-                }else if(valueReturn.equals("boss")){
+                } else if (valueReturn.equals("staff")) {
+                    new StaffMainMenu();
+                } else if (valueReturn.equals("manager")) {
+                    new ManagerMainMenu();
+                } else if (valueReturn.equals("boss")) {
                     bos.setUsername(cekUsername);
                     new BossMainMenu(bos.getUsername());
                 }
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Login Failed");
             }
