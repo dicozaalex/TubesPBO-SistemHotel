@@ -132,14 +132,13 @@ public class StaffController {
 
     public static List<List<String>> getAllExtras() {
         List<List<String>> hasil = new ArrayList<>();
-        List<String> extras = new ArrayList<>();
         conn.connect();
         String query = "SELECT * FROM extra";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet resultSet = stmt.executeQuery(query);
             while (resultSet.next()) {
-                extras.clear();
+                List<String> extras = new ArrayList<>();
                 extras.add(String.valueOf(resultSet.getInt("idExtra")));
                 extras.add(resultSet.getString("namaExtra"));
                 extras.add(String.valueOf(resultSet.getInt("idCabang")));
@@ -156,7 +155,7 @@ public class StaffController {
 
     public static boolean addExtra(Extra extra) {
         conn.connect();
-        String query = "INSERT INTO extra (idCabang, namaExtra, hargaExtra) VALUES (?,?,?,?)";
+        String query = "INSERT INTO extra (idCabang, namaExtra, hargaExtra) VALUES (?,?,?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, extra.getIdCabang());
@@ -205,14 +204,13 @@ public class StaffController {
 
     public static List<List<String>> getAllVouchers() {
         List<List<String>> hasil = new ArrayList<>();
-        List<String> voucher = new ArrayList<>();
         conn.connect();
         String query = "SELECT * FROM voucher";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet resultSet = stmt.executeQuery(query);
             while (resultSet.next()) {
-                voucher.clear();
+                List<String> voucher = new ArrayList<>();
                 voucher.add(String.valueOf(resultSet.getInt("idVoucher")));
                 voucher.add(resultSet.getString("namaVoucher"));
                 voucher.add(String.valueOf(resultSet.getDouble("persenVoucher")));
