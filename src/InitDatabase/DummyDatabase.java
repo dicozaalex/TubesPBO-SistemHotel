@@ -78,6 +78,7 @@ public class DummyDatabase {
 
     public void insertATM() {
         String query = "INSERT INTO atm (cardNumber, saldo, pin) VALUES(?,?,?), (?,?,?);";
+        conn.connect();
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setString(1, atm1.getCardNumber());
@@ -90,6 +91,7 @@ public class DummyDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        conn.disconnect();
     }
     public void insertBoss() {
         String query = "INSERT INTO boss (firstName, lastName, userName, password, telepon, email, statusUser) "
